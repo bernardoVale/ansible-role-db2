@@ -1,0 +1,12 @@
+---
+db2_packages:
+ - pam
+ - pam.i686
+ - libaio
+ - compat-libstdc++-33.i686
+ - compat-libstdc++-33
+ - libstdc++.i686
+ - libstdc++
+ - ksh
+ - vim
+ - unzip
