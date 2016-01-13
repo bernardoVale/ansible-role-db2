@@ -1,2 +1,5 @@
 #Ignore vagrant files
 .vagrant/
+#Big files
+*.zip
+*.tar.gz

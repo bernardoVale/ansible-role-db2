@@ -1,0 +1,19 @@
+---
+db2_packages:
+ - pam
+ - pam-devel.i686
+ - libaio
+ - compat-libstdc++-33.i686
+ - compat-libstdc++-33
+ - libstdc++-devel.i686
+ - libstdc++
+ - ksh
+ - vim
+ - unzip
+# Security limits
+limits_path: /etc/security/limits.conf
+limits_limits:
+  - "* hard nofile 65536"
+  - "* soft nofile 65536"
+  - "* hard nproc 10000"
+  - "* soft nproc 10000"

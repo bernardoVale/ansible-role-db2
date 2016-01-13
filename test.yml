@@ -1,0 +1,6 @@
+---
+  - hosts: all
+    gather_facts: True
+    roles:
+      - { role: Stouts.limits, tags: [ 'limits' ] }
+      - db2

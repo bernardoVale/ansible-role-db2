@@ -1,0 +1,452 @@
+** General Options
+PROD                      = DB2_SERVER_EDITION
+FILE                      = /opt/ibm/db2/V10.5
+LIC_AGREEMENT             = ACCEPT         ** ACCEPT or DECLINE
+INSTALL_TYPE              = TYPICAL         ** TYPICAL, COMPACT, CUSTOM
+
+
+
+** The following languages apply to all translated components. Enable the
+** language(s) you want installed. If you do not enable any language keywords,
+** then the English language (EN) will still be installed by default.
+** ---------------------------------------------------------------------------
+*LANG                     = BR              ** Portuguese - Brazil (pt_BR)
+*LANG                     = CN              ** Simplified Chinese (zh_CN)
+*LANG                     = CZ              ** Czech (cs_CZ)
+*LANG                     = DE              ** German (de_DE)
+*LANG                     = ES              ** Spanish (es_ES)
+*LANG                     = FR              ** French (fr_FR)
+*LANG                     = IT              ** Italian (it_IT)
+*LANG                     = JP              ** Japanese (ja_JP)
+*LANG                     = KR              ** Korean (ko_KR)
+*LANG                     = PL              ** Polish (pl_PL)
+*LANG                     = RU              ** Russian (ru_RU)
+*LANG                     = TW              ** Traditional Chinese (zh_TW)
+
+** Instance Creation Settings
+** --------------------------
+INSTANCE                  = DB2_INST        ** char(8)  no spaces
+
+DB2_INST.NAME             = db2inst1        ** char(8)  no 
+
+** The UID will be generated if the keyword is not specified - highly
+** recommended.
+DB2_INST.GROUP_NAME       = db2iadm1        ** char(30) no spaces
+
+DB2_INST.HOME_DIRECTORY   =                 ** char(64) no spaces
+DB2_INST.PASSWORD         = oracle
+
+DB2_INST.AUTOSTART        = YES             ** YES or NO
+DB2_INST.START_DURING_INSTALL = YES         ** YES or NO. 
+
+
+** Fenced User Creation Settings
+** -----------------------------
+DB2_INST.FENCED_USERNAME  = db2fenc1
+DB2_INST.FENCED_GROUP_NAME = db2fadm1
+*DB2_INST.FENCED_PASSWORD =                 ** char(8)
+
+
+** Instance DBM CFG Settings
+** -------------------------
+*DB2_INST.CF_DIAGLEVEL    = 2               ** a number in range [0 - 4]
+*DB2_INST.CF_DIAGPATH     =                 ** BLANK or char(215)
+*DB2_INST.CF_MEM_SZ       = AUTOMATIC       ** AUTOMATIC or a number in range [32768 - 4 294 967 295]
+*DB2_INST.CF_NUM_CONNS    = AUTOMATIC       ** AUTOMATIC or a number in range [4-256]
+*DB2_INST.CF_NUM_WORKERS  = AUTOMATIC       ** AUTOMATIC or a number in range [1 - 31]
+*DB2_INST.RSTRT_LIGHT_MEM = AUTOMATIC       ** 1-10 for AUTOMATIC or a number in range [1 - 50]
+*DB2_INST.AGENTPRI        =                 ** SYSTEM, -1 or 41-128
+*DB2_INST.ASLHEAPSZ       =                 ** 1 - 524288
+*DB2_INST.AUDIT_BUF_SZ    =                 ** 0 - 65000
+*DB2_INST.CATALOG_NOAUTH  =                 ** 0, 1, YES or NO
+*DB2_INST.CLUSTER_MGR     =                 ** TSA, VENDOR:<fully qualified vendor library>
+*DB2_INST.COMM_BANDWIDTH  =                 ** -1 or 0.1 - 100000.0
+*DB2_INST.CONN_ELAPSE     =                 ** 0 - 100
+*DB2_INST.CPUSPEED        =                 ** -1 or 1e-10 - 1
+*DB2_INST.DFTDBPATH       =                 ** any valid path
+*DB2_INST.DFT_ACCOUNT_STR =                 ** BLANK or char(25)
+*DB2_INST.DFT_MON_BUFPOOL =                 ** ON or OFF
+*DB2_INST.DFT_MON_LOCK    =                 ** ON or OFF
+*DB2_INST.DFT_MON_SORT    =                 ** ON or OFF
+*DB2_INST.DFT_MON_STMT    =                 ** ON or OFF
+*DB2_INST.DFT_MON_TABLE   =                 ** ON or OFF
+*DB2_INST.DFT_MON_UOW     =                 ** ON or OFF
+*DB2_INST.DFT_MON_TIMESTAMP =               ** ON or OFF
+*DB2_INST.DIAGLEVEL       =                 ** 0 - 4
+*DB2_INST.DIAGPATH        =                 ** BLANK or char(215)
+*DB2_INST.DIAGSIZE        =                 ** A value specified in MB and limited by the available disk space in DIAGPATH. Minimum 2 MB must be specified.
+*DB2_INST.FENCED_POOL     = -1 or AUTOMATIC ** -1(MAX_COORDAGENTS), AUTOMATIC or a number in range [0, 64000]
+*DB2_INST.INSTANCE_MEMORY = AUTOMATIC       ** AUTOMATIC or a number in range [0, 1000000] for 32-bit and [0, 68719476736] for 64-bit
+*DB2_INST.HEALTH_MON      =                 ** default is ON; ON or OFF
+*DB2_INST.MAX_CONNECTIONS = -1 or AUTOMATIC ** -1, AUTOMATIC or [1, 64000]
+*DB2_INST.FED_NOAUTH      = NO              ** YES or NO, default is NO
+*DB2_INST.DIR_CACHE       =                 ** YES or NO
+*DB2_INST.DISCOVER        =                 ** DISABLE, KNOWN or SEARCH
+*DB2_INST.DISCOVER_COMM   =                 ** BLANK or TCPIP
+*DB2_INST.DISCOVER_INST   =                 ** ENABLE or DISABLE
+*DB2_INST.FCM_NUM_ANCHORS =                 ** -1 or 128 - FCM_NUM_RQB
+*DB2_INST.FCM_NUM_BUFFERS =                 ** 128 - 65300
+*DB2_INST.FCM_NUM_CONNECT =                 ** -1 or 128 - FCM_NUM_RQB
+*DB2_INST.FCM_NUM_RQB     =                 ** 128 - 120000
+*DB2_INST.INDEXREC        =                 ** ACCESS or RESTART
+*DB2_INST.INTRA_PARALLEL  = NO              ** SYSTEM, YES or NO
+*DB2_INST.JAVA_HEAP_SZ    =                 ** 0 - 4096
+*DB2_INST.JDK_PATH        =                 ** BLANK or char(255)
+*DB2_INST.SSL_SVR_KEYDB   =                 ** BLANK or char(1023)
+*DB2_INST.SSL_SVR_STASH   =                 ** BLANK or char(1023)
+*DB2_INST.SSL_SVR_LABEL   =                 ** BLANK or char(1023)
+*DB2_INST.SSL_SVCENAME    =                 ** BLANK or char(14)
+*DB2_INST.SSL_CIPHERSPECS =                 ** BLANK or char(255)
+*DB2_INST.SSL_VERSIONS    =                 ** BLANK or char(255)
+*DB2_INST.SSL_CLNT_KEYDB  =                 ** BLANK or char(1023)
+*DB2_INST.SSL_CLNT_STASH  =                 ** BLANK or char(1023)
+*DB2_INST.ALTERNATE_AUTH_ENC =              ** NOT_SPECIFIED, AES_ONLY, AES_CMP
+*DB2_INST.KEEPDARI        =                 ** YES or NO
+*DB2_INST.MAXAGENTS       =                 ** 1 - 64000
+*DB2_INST.MAXCAGENTS      =                 ** -1 or 1 - MAX_COORDAGENTS
+*DB2_INST.MAXDARI         =                 ** -1 or 1 - MAX_COORDAGENTS
+*DB2_INST.MAXTOTFILOP     =                 ** 100 - 32768
+*DB2_INST.MAX_CONNRETRIES =                 ** 0 - 100
+*DB2_INST.MAX_COORDAGENTS = 200 or AUTOMATIC ** 200, AUTOMATIC, -1 or 0 - 64000, -1 translates into a value of 200
+*DB2_INST.MAX_TIME_DIFF   = 300             ** 1-1440. The unit of measurement is second
+*DB2_INST.MAX_QUERYDEGREE =                 ** ANY, -1 or 1 - 32767
+*DB2_INST.MON_HEAP_SZ     = AUTOMATIC       ** AUTOMATIC or 0 - 60000
+*DB2_INST.NUMDB           =                 ** 1 - 256
+*DB2_INST.NUM_INITAGENTS  = 0               ** 0 - 64000
+*DB2_INST.NUM_INITDARIS   =                 ** 0 - MAXDARI
+*DB2_INST.NUM_INITFENCED  = 0               ** 0 - 64000
+*DB2_INST.NUM_POOLAGENTS  = 100 or AUTOMATIC ** -1, AUTOMATIC or 0 - 64000
+*DB2_INST.QUERY_HEAP_SZ   =                 ** 2 - 524288
+*DB2_INST.RESTBUFSZ       =                 ** 16 - 524288
+*DB2_INST.RESYNC_INTERVAL =                 ** 1 - 60000
+*DB2_INST.ROUTE_OBJ_NAME  =                 ** BLANK or char(255)
+*DB2_INST.RQRIOBLK        =                 ** 4096 - 65535
+*DB2_INST.SHEAPTHRES      =                 ** 250 - 2097152
+*DB2_INST.SPM_LOG_FILE_SZ =                 ** 4 - 1000
+*DB2_INST.SPM_LOG_PATH    =                 ** BLANK or char(226)
+*DB2_INST.SPM_MAX_RESYNC  =                 ** 10 - 256
+*DB2_INST.SPM_NAME        =                 ** BLANK or char(8)
+*DB2_INST.START_STOP_TIME =                 ** 1 - 1440
+*DB2_INST.SYSADM_GROUP    =                 ** BLANK or char(30)
+*DB2_INST.SYSCTRL_GROUP   =                 ** BLANK or char(30)
+*DB2_INST.SYSMAINT_GROUP  =                 ** BLANK or char(30)
+*DB2_INST.TP_MON_NAME     =                 ** BLANK or char(19)
+*DB2_INST.TRUST_ALLCLNTS  =                 ** YES, NO or DRDAONLY
+*DB2_INST.TRUST_CLNTAUTH  =                 ** CLIENT or SERVER
+*DB2_INST.UDF_MEM_SZ      =                 ** 128 - 60000
+*DB2_INST.FCM_NUM_CHANNELS =                ** 128, 524288
+*DB2_INST.FEDERATED_ASYNC = 0               ** ANY or 0 - 32767
+
+** Instance Profile Registry Settings
+** ----------------------------------
+*DB2_INST.DB2ACCOUNT      =                 ** BLANK or char(199)
+*DB2_INST.DB2ATLD_PORTS   =                 ** BLANK or 1-65535:1-65535  n1<=n2
+*DB2_INST.DB2BIDI         =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2BQTIME       =                 ** BLANK or 1 - MAX
+*DB2_INST.DB2BQTRY        =                 ** BLANK or 0 - MAX
+*DB2_INST.DB2CHKPTR       =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2CLIINIPATH   =                 ** BLANK or char(260)
+*DB2_INST.DB2CODEPAGE     =                 ** BLANK or 0 - MAX
+*DB2_INST.DB2CONNECT_IN_APP_PROCESS =       ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2COUNTRY      =                 ** BLANK or 1 - 999
+*DB2_INST.DB2DBDFT        =                 ** BLANK or char(8)
+*DB2_INST.DB2DEFPREP      =                 ** BLANK, ALL, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2ENVLIST      =                 ** BLANK or char()
+*DB2_INST.DB2INCLUDE      =                 ** BLANK or char()
+*DB2_INST.DB2IQTIME       =                 ** BLANK or 1 - MAX
+*DB2_INST.DB2LIBPATH      =                 ** BLANK or char()
+*DB2_INST.DB2LOADREC      =                 ** BLANK or char(260)
+*DB2_INST.DB2LOCK_TO_RB   =                 ** BLANK or STATEMENT
+*DB2_INST.DB2NOEXITLIST   =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2OLDEVMON     =                 ** BLANK or char()
+*DB2_INST.DB2OPTIONS      =                 ** BLANK or -/+[a,c,e[c,s],n,o,p,s,t,v,w,x] and/or -[f,l,r,z]filename
+*DB2_INST.DB2_OPTSTATS_LOG =                ** OFF or ON with parameters {NUM | SIZE | NAME | DIR}
+*DB2_INST.DB2PRIORITIES   =                 ** BLANK or char()
+*DB2_INST.DB2RQTIME       =                 ** BLANK or 1 - MAX
+*DB2_INST.DB2_SET_MAX_CONTAINER_SIZE =      ** -1 (no limit) or any integer greater than 64MB
+*DB2_INST.DB2SORT         =                 ** BLANK or char(260)
+*DB2_INST.DB2_SYSTEM_MONITOR_SETTINGS =     ** Controls parameters OLD_CPU_USAGE and DISABLE_CPU_USAGE with ON or OFF values
+*DB2_INST.DB2_AVOID_PREFETCH =              ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_CORRELATED_PREDICATES =       ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_FORCE_NLS_CACHE =             ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_HASH_JOIN   =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_INDEX_FREE  =                 ** BLANK or 0 - 60
+*DB2_INST.DB2_LIKE_VARCHAR =                ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T, F or 0.0 - 5.0 (exclusive)
+*DB2_INST.DB2_LOADSORT_STACKSZ =            ** BLANK or 1 - MAX
+*DB2_INST.DB2_NO_PKG_LOCK =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_NUM_FAILOVER_NODES =          ** BLANK or 0 - 999
+*DB2_INST.DB2_PARALLEL_IO =                 ** BLANK, * or 0-4095,0-4095,...
+*DB2_INST.DB2_PRED_FACTORIZE =              ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_SORT_AFTER_TQ =               ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2_STRIPED_CONTAINERS =          ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_INST.DB2INSTOWNER    =                 ** BLANK or char(30)
+*DB2_INST.DB2DBMSADDR     =                 ** BLANK or char(10)
+*DB2_INST.DB2_DISABLE_FLUSH_LOG =           ** BLANK or ON, OFF
+*DB2_INST.DB2LOCALE       =                 ** BLANK or YES, NO
+*DB2_INST.DB2NODE         =                 ** BLANK or YES NO
+*DB2_INST.DB2_USE_PAGE_CONTAINER_TAG =      ** BLANK or ON
+*DB2_INST.DB2TCPCONNMGRS  =                 ** BLANK or 1 - 8
+*DB2_INST.DB2_PARTITIONEDLOAD_DEFAULT =     ** BLANK or YES, NO
+*DB2_INST.DB2_INLIST_TO_NLJN =              ** BLANK or YES, NO
+*DB2_INST.DB2_SELECTIVITY =                 ** BLANK or YES, NO
+*DB2_INST.DB2_REDUCED_OPTIMIZATION =        ** BLANK, DISABLE, YES, NO, 0 - MAX
+*DB2_INST.DB2_BINSORT     =                 ** BLANK or YES, NO
+*DB2_INST.DB2BPVARS       =                 ** BLANK or char()
+*DB2_INST.DB2_ENABLE_BUFPD =                ** BLANK or ON, OFF
+*DB2_INST.DB2_EVMON_EVENT_LIST_SIZE = 0     ** A value specified in KB, MB or GB and limited by the available memory from the monitor heap
+*DB2_INST.DB2_EXTENDED_OPTIMIZATION =       ** BLANK or ON, OFF
+*DB2_INST.DB2FODC         = Concatenation of all FODC parameters: CORELIMIT, DUMPCORE, DUMDIR, MEMSCAN and SERVICELEVEL ** CORELIMIT, DUMPCORE, DUMPDIR and MEMSCAN parameters are set different for Unix and Windows
+*DB2_INST.DB2MAXFSCRSEARCH =                ** BLANK or -1, 1 - 33554
+*DB2_INST.DB2MEMDISCLAIM  =                 ** BLANK or YES, NO
+*DB2_INST.DB2_VENDOR_INI  =                 ** BLANK or char()
+*DB2_INST.DB2_XBSA_LIBRARY =                ** BLANK or char()
+*DB2_INST.DB2LDAP_SEARCH_SCOPE =            ** BLANK LOCAL DOMAIN GLOBAL
+*DB2_INST.DB2MEMMAXFREE   =                 ** BLANK or char()
+*DB2_INST.DB2NTMEMSIZE    =                 ** BLANK or char()
+*DB2_INST.DB2_OVERRIDE_BPF =                ** BLANK or 1 - MAX
+*DB2_INST.DB2_DJ_COMM     =                 ** BLANK or char()
+*DB2_INST.DB2ADMINSERVER  =                 ** BLANK or char(64)
+*DB2_INST.DB2_PINNED_BP   = NO              ** YES or NO
+*DB2_INST.DB2REMOTEPREG   =                 ** BLANK or char(64)
+*DB2_INST.DB2_ANTIJOIN    =                 ** BLANK or YES, NO, EXTEND
+*DB2_INST.DB2_COLLECT_TS_REC_INFO =         ** BLANK or YES, NO
+*DB2_INST.DB2PROCESSORS   =                 ** BLANK or 1 - MAX
+*DB2_INST.DB2ASSUMEUPDATE =                 ** BLANK or ON, OFF
+*DB2_INST.DB2_SKIPDELETED =                 ** BLANK or ON, OFF
+*DB2_INST.DB2_SQLROUTINE_PREPOPTS =         ** BLANK or char()
+*DB2_INST.DB2_INDEX_TYPE2 =                 ** BLANK or ON, OFF
+*DB2_INST.DB2_APM_PERFORMANCE =             ** BLANK or ON, OFF
+*DB2_INST.DB2_FMP_COMM_HEAPSZ =             ** BLANK or 1 - MAX
+*DB2_INST.DB2_EVALUNCOMMITTED =             ** BLANK or YES, NO
+*DB2_INST.DB2_NO_FORK_CHECK =               ** BLANK or ON, OFF
+*DB2_INST.DB2_KEEPTABLELOCK =               ** BLANK or ON, OFF
+*DB2_INST.DB2GRAPHICUNICODESERVER =         ** BLANK or ON, OFF
+*DB2_INST.DB2_MINIMIZE_LISTPREFETCH =       ** BLANK or YES, NO
+*DB2_INST.DB2_TRUSTED_BINDIN =              ** BLANK or ON, OFF, CHECK
+*DB2_INST.DB2_CLPPROMPT   =                 ** BLANK or char(99)
+*DB2_INST.DB2_FORCE_APP_ON_MAX_LOG =        ** BLANK or TRUE, FALSE
+*DB2_INST.DB2_CLP_EDITOR  =                 ** BLANK or char()
+*DB2_INST.DB2_CLP_HISTSIZE =                ** BLANK or 1 - 500
+*DB2_INST.DB2_LOAD_COPY_NO_OVERRIDE =       ** BLANK or LOCAL, DOMAIN, GLOBAL
+*DB2_INST.DB2_MAX_NON_TABLE_LOCKS =         ** BLANK or 1 - MAX
+*DB2_INST.DB2_USE_ALTERNATE_PAGE_CLEANING =  ** BLANK or ON, OFF
+*DB2_INST.DB2_SCATTERED_IO =                ** BLANK or ON, OFF
+*DB2_INST.DB2_NO_MPFA_FOR_NEW_DB =          ** BLANK or YES, NO
+*DB2_INST.DB2_OBJECT_TABLE_ENTRIES =        ** BLANK or 0 - 50000
+*DB2_INST.DB2_VIEW_REOPT_VALUES =           ** BLANK or YES, NO
+*DB2_INST.DB2_SELUDI_COMM_BUFFER =          ** BLANK or ON, OFF
+*DB2_INST.DB2_ENABLE_AUTOCONFIG_DEFAULT =   ** BLANK, YES, NO
+*DB2_INST.DB2_OPT_MAX_TEMP_SIZE =           ** BLANK or 0 - MAX
+*DB2_INST.DB2RCMD_LEGACY_MODE =             ** YES, ON, TRUE, 1 or NO, OFF, FALSE, 0
+*DB2_INST.DB2_LARGE_PAGE_MEM =              ** *, DB
+*DB2_INST.DB2_MAX_LOB_BLOCK_SIZE = 0        ** 0 - 21487483647
+*DB2_INST.DB2RSHCMD       = rsh             ** Values are a full path name to rsh, or ssh
+*DB2_INST.DB2AUTH         =                 ** BLANK or char()
+*DB2_INST.DB2CONNECT_DISCONNECT_ON_INTERRUPT = NO ** YES, TRUE, 1 or NO, FALSE, 0
+*DB2_INST.DB2CONNECT_ENABLE_EURO_CODEPAGE =  ** BLANK or char()
+*DB2_INST.DB2FCMCOMM      = TCPIP4          ** TCPIP4 or TCPIP6
+*DB2_INST.DB2FFDC         =                 ** BLANK, ON, CORE:OFF
+*DB2_INST.DB2LOADFLAGS    =                 ** BLANK or char()
+*DB2_INST.DB2RSHTIMEOUT   = 30              ** 1 - 120
+*DB2_INST.DB2TCP_CLIENT_CONTIMEOUT = 0      ** 0 - 32767
+*DB2_INST.DB2TCP_CLIENT_RCVTIMEOUT = 0      ** 0 - 32767
+*DB2_INST.DB2TRC_DEF_BUFFSIZE =             ** BLANK or char()
+*DB2_INST.DB2YIELD        =                 ** BLANK or char()
+*DB2_INST.DB2_ASYNC_IO_MAXFILOP = MAXFILOP  ** MAXFILOP - MAX
+*DB2_INST.DB2_BAR_AUTONOMIC_DISABLE =       ** BLANK or char()
+*DB2_INST.DB2_CONNRETRIES_INTERVAL =        ** BLANK or char()
+*DB2_INST.DB2_DXX_PATHS_ALLOWED_READ =      ** BLANK or char()
+*DB2_INST.DB2_DXX_PATHS_ALLOWED_WRITE =     ** BLANK or char()
+*DB2_INST.DB2_HADR_BUF_SIZE = 2*LOGBUFSZ    ** BLANK or 0 - MAX
+*DB2_INST.DB2_LOGGING_DETAIL =              ** BLANK or char()
+*DB2_INST.DB2_MAP_XML_AS_CLOB_FOR_DLC = NO  ** YES, NO
+*DB2_INST.DB2_MAX_CLIENT_CONNRETRIES =      ** BLANK or char()
+*DB2_INST.DB2_MAX_INACT_STMTS =             ** 0 - 4294967296
+*DB2_INST.DB2_MDC_ROLLOUT = IMMEDIATE       ** DEFER, IMMEDIATE or OFF
+*DB2_INST.DB2_MINIMUM_CLIENT_LEVEL =        ** BLANK or char()
+*DB2_INST.DB2_NUM_CKPW_DAEMONS = 3          ** 0 - 100
+*DB2_INST.DB2_RESOURCE_POLICY =             ** valid path to configuration file
+*DB2_INST.DB2_SKIPINSERTED = OFF            ** ON, OFF
+*DB2_INST.DB2_SMS_TRUNC_TMPTABLE_THRESH =   ** -1, 0-n where n is the number of extents per container that are to be maintained
+*DB2_INST.DB2_SNAPSHOT_NOAUTH =             ** BLANK or char()
+*DB2_INST.DB2_TAPEMGR_TAPE_EXPIRATION =     ** BLANK or char()
+*DB2_INST.DB2_UPDDBCFG_SINGLE_DBPARTITION =  ** YES, 1, TRUE or NO, 0, FALSE
+*DB2_INST.DB2_USE_DB2JCCT2_JROUTINE =       ** ON, YES, 1, TRUE or OFF, NO, 0, FALSE
+*DB2_INST.DB2_UTIL_MSGPATH = instanceName/tmp directory ** BLANK or char()
+*DB2_INST.DB2_WORKLOAD    = Not set         ** BLANK, SAP
+
+** 2nd (non-pureScale) Instance Creation Settings
+** ----------------------------------------------
+** Multiple (non-pureScale) DB2 instances can be created in the same
+** installation. This section shows how to specify the 2nd instance in the rsp
+** file. Note: Only a subset of the instance keywords are listed below. You can
+** specify other instance related keywords similar as the 1st instance. All
+** keywords in this section are commented out. By default, only one instance
+** will be created during the install.
+
+** Prefix name of this instance set. Its value is used by all keywords for the
+** same instance.
+*INSTANCE                 = DB2_INS2        ** char(8) no spaces
+*DB2_INS2.NAME            = db2inst2        ** char(8)  no spaces, no upper case letters
+
+** Use a generated UID if no value provided - highly recommended.
+*DB2_INS2.UID             =                 ** Unsigned integer
+*DB2_INS2.GROUP_NAME      = db2iadm1        ** char(30) no spaces
+
+** Use a generated GID if no value provided - highly recommended.
+*DB2_INS2.GID             =                 ** Unsigned integer
+*DB2_INS2.HOME_DIRECTORY  =                 ** char(64) no spaces. Valid for root install only
+*DB2_INS2.PASSWORD        = Replace with your password ** Valid for root install only
+
+
+** Global Profile Registry Settings
+** --------------------------------
+*DB2ACCOUNT               =                 ** BLANK or char(199)
+*DB2ATLD_PORTS            =                 ** BLANK or 1-65535:1-65535  n1<=n2
+*DB2BIDI                  =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2BQTIME                =                 ** BLANK or 1 - MAX
+*DB2BQTRY                 =                 ** BLANK or 0 - MAX
+*DB2CHGPWD_EEE            =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2CHKPTR                =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2CLIINIPATH            =                 ** BLANK or char(260)
+*DB2CODEPAGE              =                 ** BLANK or 0 - MAX
+*DB2COMM                  =                 ** BLANK or TCPIP
+*DB2COUNTRY               =                 ** BLANK or 1 - 999
+*DB2DBDFT                 =                 ** BLANK or char(8)
+*DB2DEFPREP               =                 ** BLANK, ALL, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2ENVLIST               =                 ** BLANK or char()
+*DB2IQTIME                =                 ** BLANK or 1 - MAX
+*DB2LDAPCACHE             =                 ** YES or NO
+*DB2LDAPHOST              =                 ** BLANK or char()
+*DB2LDAP_BASEDN           =                 ** BLANK or char()
+*DB2LDAP_CLIENT_PROVIDER  =                 ** BLANK, MICROSOFT or IBM
+*DB2LIBPATH               =                 ** BLANK or char()
+*DB2LOADREC               =                 ** BLANK or char(1023)
+*DB2LOCK_TO_RB            =                 ** BLANK or STATEMENT
+*DB2NOEXITLIST            =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2OLDEVMON              =                 ** BLANK or char()
+*DB2OPTIONS               =                 ** BLANK or -/+[a,c,e[c,s],n,o,p,s,t,v,w,x] and/or -[f,l,r,z]filename
+*DB2_OPTSTATS_LOG         =                 ** OFF or ON with parameters {NUM | SIZE | NAME | DIR}
+*DB2PRIORITIES            =                 ** BLANK or char()
+*DB2RQTIME                =                 ** BLANK or 1 - MAX
+*DB2_SET_MAX_CONTAINER_SIZE =               ** -1 (no limit) or any integer greater than 64MB
+*DB2SORT                  =                 ** BLANK or char(1023)
+*DB2SYSTEM                =                 ** char(64)
+*DB2_SYSTEM_MONITOR_SETTINGS =              ** Controls parameters OLD_CPU_USAGE and DISABLE_CPU_USAGE with ON or OFF values
+*DB2_ENABLE_LDAP          =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_FORCE_NLS_CACHE      =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2_NUM_FAILOVER_NODES   =                 ** BLANK or 0 - 999
+*DB2_SORT_AFTER_TQ        =                 ** BLANK, 0, 1, YES, NO, ON, OFF, Y, N, TRUE, FALSE, T or F
+*DB2INSTOWNER             =                 ** BLANK or char(30)
+*DB2DBMSADDR              =                 ** BLANK or char(10)
+*DB2_DISABLE_FLUSH_LOG    =                 ** BLANK or ON, OFF
+*DB2_LIC_STAT_SIZE        =                 ** BLANK or 0 - 32767
+*DB2LOCALE                =                 ** BLANK or YES, NO
+*DB2NODE                  =                 ** BLANK or YES NO
+*DB2_USE_PAGE_CONTAINER_TAG =               ** BLANK or ON
+*DB2TCPCONNMGRS           =                 ** BLANK or 1 - 8
+*DB2_PARTITIONEDLOAD_DEFAULT =              ** BLANK or YES, NO
+*DB2_INLIST_TO_NLJN       =                 ** BLANK or YES, NO
+*DB2_SELECTIVITY          =                 ** BLANK or YES, NO
+*DB2_REDUCED_OPTIMIZATION =                 ** BLANK, DISABLE, YES, NO, 0 - MAX
+*DB2_BINSORT              =                 ** BLANK or YES, NO
+*DB2BPVARS                =                 ** BLANK or char()
+*DB2_ENABLE_BUFPD         =                 ** BLANK or ON, OFF
+*DB2_EVMON_EVENT_LIST_SIZE = 0              ** A value specified in KB, MB or GB but limited by the available memory from the monitor heap
+*DB2_EXTENDED_OPTIMIZATION =                ** BLANK or ON, OFF
+*DB2FODC                  = Concatenation of all FODC parameters: CORELIMIT, DUMPCORE, DUMDIR and MEMSCAN; and their values ** CORELIMIT, DUMPCORE, DUMPDIR and MEMSCAN parameters are set different for Unix and Windows
+*DB2MAXFSCRSEARCH         =                 ** BLANK or -1, 1 - 33554
+*DB2MEMDISCLAIM           =                 ** BLANK or YES, NO
+*DB2_VENDOR_INI           =                 ** BLANK or char()
+*DB2_XBSA_LIBRARY         =                 ** BLANK or char()
+*DB2LDAP_SEARCH_SCOPE     =                 ** BLANK LOCAL DOMAIN GLOBAL
+*DB2MEMMAXFREE            =                 ** BLANK or char()
+*DB2NTMEMSIZE             =                 ** BLANK or char()
+*DB2_OVERRIDE_BPF         =                 ** BLANK or 1 - MAX
+*DB2_DJ_COMM              =                 ** BLANK or char()
+*DB2ADMINSERVER           =                 ** BLANK or char(64)
+*DB2_PINNED_BP            = NO              ** YES or NO
+*DB2REMOTEPREG            =                 ** BLANK or char(64)
+*DB2_ANTIJOIN             =                 ** BLANK or YES, NO, EXTEND
+*DB2_COLLECT_TS_REC_INFO  =                 ** BLANK or YES, NO
+*DB2PROCESSORS            =                 ** BLANK or 1 - MAX
+*DB2ASSUMEUPDATE          =                 ** BLANK or ON, OFF
+*DB2_SKIPDELETED          =                 ** BLANK or ON, OFF
+*DB2_SQLROUTINE_PREPOPTS  =                 ** BLANK or char()
+*DB2_INDEX_TYPE2          =                 ** BLANK or ON, OFF
+*DB2_APM_PERFORMANCE      =                 ** BLANK or ON, OFF
+*DB2_FMP_COMM_HEAPSZ      =                 ** BLANK or 1 - MAX
+*DB2_EVALUNCOMMITTED      =                 ** BLANK or YES, NO
+*DB2_NO_FORK_CHECK        =                 ** BLANK or ON, OFF
+*DB2_KEEPTABLELOCK        =                 ** BLANK or ON, OFF
+*DB2GRAPHICUNICODESERVER  =                 ** BLANK or ON, OFF
+*DB2_MINIMIZE_LISTPREFETCH =                ** BLANK or YES, NO
+*DB2_TRUSTED_BINDIN       =                 ** BLANK or ON, OFF, CHECK
+*DB2_CLPPROMPT            =                 ** BLANK or char(99)
+*DB2_FORCE_APP_ON_MAX_LOG =                 ** BLANK or TRUE, FALSE
+*DB2_CLP_EDITOR           =                 ** BLANK or char()
+*DB2_CLP_HISTSIZE         =                 ** BLANK or 1 - 500
+*DB2_LOAD_COPY_NO_OVERRIDE =                ** BLANK or LOCAL, DOMAIN, GLOBAL
+*DB2_MAX_NON_TABLE_LOCKS  =                 ** BLANK or 1 - MAX
+*DB2_USE_ALTERNATE_PAGE_CLEANING =          ** BLANK or ON, OFF
+*DB2_SCATTERED_IO         =                 ** BLANK or ON, OFF
+*DB2_NO_MPFA_FOR_NEW_DB   =                 ** BLANK or YES, NO
+*DB2_OBJECT_TABLE_ENTRIES =                 ** BLANK or 0 - 50000
+*DB2_VIEW_REOPT_VALUES    =                 ** BLANK or YES, NO
+*DB2_SELUDI_COMM_BUFFER   =                 ** BLANK or ON, OFF
+*DB2_ENABLE_AUTOCONFIG_DEFAULT =            ** BLANK, YES, NO
+*DB2_OPT_MAX_TEMP_SIZE    =                 ** BLANK or 0 - MAX
+*DB2RCMD_LEGACY_MODE      =                 ** YES, ON, TRUE, 1 or NO, OFF, FALSE, 0
+*DB2_LARGE_PAGE_MEM       =                 ** *, DB
+*DB2_MAX_LOB_BLOCK_SIZE   = 0               ** 0 - 21487483647
+*DB2RSHCMD                = rsh             ** Values are a full path name to rsh, or ssh
+*DB2AUTH                  =                 ** BLANK or char()
+*DB2CONNECT_DISCONNECT_ON_INTERRUPT = NO    ** YES, TRUE, 1 or NO, FALSE, 0
+*DB2CONNECT_ENABLE_EURO_CODEPAGE =          ** BLANK or char()
+*DB2FCMCOMM               = TCPIP4          ** TCPIP4 or TCPIP6
+*DB2FFDC                  =                 ** BLANK, ON, CORE:OFF
+*DB2LOADFLAGS             =                 ** BLANK or char()
+*DB2RSHTIMEOUT            = 30              ** or 1 - 120
+*DB2TCP_CLIENT_CONTIMEOUT = 0               ** 0 - 32767
+*DB2TCP_CLIENT_RCVTIMEOUT = 0               ** 0 - 32767
+*DB2TRC_DEF_BUFFSIZE      =                 ** BLANK or char()
+*DB2YIELD                 =                 ** BLANK or char()
+*DB2_ASYNC_IO_MAXFILOP    = MAXFILOP        ** MAXFILOP - MAX
+*DB2_BAR_AUTONOMIC_DISABLE =                ** BLANK or char()
+*DB2_CONNRETRIES_INTERVAL =                 ** BLANK or char()
+*DB2_DXX_PATHS_ALLOWED_READ =               ** BLANK or char()
+*DB2_DXX_PATHS_ALLOWED_WRITE =              ** BLANK or char()
+*DB2_HADR_BUF_SIZE        = 2*LOGBUFSZ      ** BLANK or 0 - MAX
+*DB2_LOGGING_DETAIL       =                 ** BLANK or char()
+*DB2_MAP_XML_AS_CLOB_FOR_DLC = NO           ** YES, NO
+*DB2_MAX_CLIENT_CONNRETRIES =               ** BLANK or char()
+*DB2_MAX_INACT_STMTS      =                 ** 0 - 4294967296
+*DB2_MDC_ROLLOUT          = IMMEDIATE       ** DEFER, IMMEDIATE or OFF
+*DB2_MINIMUM_CLIENT_LEVEL =                 ** BLANK or char()
+*DB2_NUM_CKPW_DAEMONS     = 3               ** 0 - 100
+*DB2_RESOURCE_POLICY      =                 ** valid path to configuration file
+*DB2_SKIPINSERTED         = OFF             ** ON, OFF
+*DB2_SMS_TRUNC_TMPTABLE_THRESH =            ** -1, 0-n where n is the number of extents per container that are to be maintained
+*DB2_SNAPSHOT_NOAUTH      =                 ** BLANK or char()
+*DB2_TAPEMGR_TAPE_EXPIRATION =              ** BLANK or char()
+*DB2_DJ_COMM              = OFF             ** ON or OFF
+*DB2_UPDDBCFG_SINGLE_DBPARTITION =          ** YES, 1, TRUE or NO, 0, FALSE
+*DB2_USE_DB2JCCT2_JROUTINE =                ** ON, YES, 1, TRUE or OFF, NO, 0, FALSE
+*DB2_UTIL_MSGPATH         = instanceName/tmp directory ** BLANK or char()
+*DB2_WORKLOAD             = Not set         ** BLANK, SAP
+
+** Database Settings
+** -----------------
+*DATABASE                 =                 ** databas1: char(8) no spaces - this is the prefix for this DB set
+*databas1.DATABASE_NAME   =                 ** favorateDB: char(8) no spaces - this is the real database
+*databas1.INSTANCE        =                 ** db2inst1: char(8)  no spaces - one value of INSTANCE keyword
+*databas1.ALIAS           =                 ** alias of databas1: char(8) no spaces and can not start with SYS, DBM or IBM
+*databas1.LOCATION        =                 ** local, remote, LOCAL or REMOTE; For client only product use remote or REMOTE
+*databas1.SYSTEM_NAME     =                 ** some remote host char(64) no spaces: for LOCATION=remote only
+*databas1.AUTHENTICATION  =                 ** CLIENT, SERVER, SERVER_ENCRYPT: optional
+*databas1.PATH            =                 ** the directory for the database: optional
+*databas1.SVCENAME        =                 ** service1: for remote LOCATION only
+*databas1.USERNAME        =                 ** db2user: char(8)  no spaces
+*databas1.PASSWORD        =                 ** db2pwd: char(8)  no spaces
+
+
