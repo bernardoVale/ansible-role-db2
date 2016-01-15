@@ -4,7 +4,7 @@
   get_url:
     url: "{{db2_binary.url}}"
     dest: "{{db2_binary.location}}"
-  when: db2_binary.remote_repo
+  when: db2_binary.url is defined
 
 - name: Decompressing DB2 Server
   unarchive:
