@@ -1,4 +1,8 @@
 ---
+  - include: get_db2.yml
+    tags: download
+
+
   - name: Disabling SELinux
     selinux: state=disabled
     tags: setup
@@ -14,32 +18,12 @@
     get_url:
       url: ftp://transfer.lb2.com.br/downloads/connections/DB2_ESE_AUSI_QS_Activ_10.5.0.5.zip
       dest: /vagrant/db2_key.zip
-    tags: download
-
-  - name: Downloading DB2
-    get_url:
-      url: ftp://transfer.lb2.com.br/downloads/connections/DB2_Svr_10.5.0.3_Linux_x86-64.tar.gz
-      dest: /vagrant/db2_10503.tar.gz
-    tags: download
-
-  - name: Installing OL Public repository
-    get_url: 
-      url: http://public-yum.oracle.com/public-yum-ol6.repo 
-      dest: /etc/yum.repos.d/public-yum-release.repo
-    tags: setup
+    tags: license
 
   - name: Installing DB2 pre requisites packages
-    yum: name={{item}} state=installed update_cache=yes disable_gpg_check=yes enablerepo=ol6_latest
+    yum: name={{item}} state=installed update_cache=yes disable_gpg_check=yes
     with_items: db2_packages
     tags: packages
-
-  - name: Decompressing DB2 Server 10.5.3
-    unarchive:
-      src: /vagrant/db2_10503.tar.gz
-      dest: /tmp/
-      copy: no
-      creates: /tmp/server
-    tags: setup
 
   - name: Running DB2 Pre Requisits Check
     command: /tmp/server/db2prereqcheck -i -s
@@ -76,3 +60,7 @@
     failed_when: "'DBI1335I' not in db2_val.stdout"
     changed_when: False
     tags: ['install', 'validate']
+
+  - debug:
+      msg: "{{db2_binary.dest}}"
+    tags: test

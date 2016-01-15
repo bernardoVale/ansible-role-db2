@@ -17,3 +17,18 @@ limits_limits:
   - "* soft nofile 65536"
   - "* hard nproc 10000"
   - "* soft nproc 10000"
+yum_repo: http://public-yum.oracle.com/public-yum-ol6.repo
+#This variable define if should download DB2
+# Set remote_repo: True and provide a URL on location to download db2 from a remote repository
+# Set remote_repo: False and define the location of the file and it's destination
+# decompress_dest: Where should decompress db2 
+db2_binary:
+  remote_repo: True
+  url: "ftp://transfer.lb2.com.br/downloads/connections/DB2_Svr_10.5.0.3_Linux_x86-64.tar.gz"
+  location: "/vagrant/db2_10503.tar.gz"
+  dest: "/tmp"
+# Local file example
+# db2_binary:
+#   remote_repo: False
+#   location: "/vagrant/db2_10503.tar.gz"
+#   dest: "/tmp"

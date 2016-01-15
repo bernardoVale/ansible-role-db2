@@ -1,0 +1,14 @@
+---
+#Download a DB2 copy
+- name: Downloading DB2
+  get_url:
+    url: "{{db2_binary.url}}"
+    dest: "{{db2_binary.location}}"
+  when: db2_binary.remote_repo
+
+- name: Decompressing DB2 Server
+  unarchive:
+    src: "{{db2_binary.location}}"
+    dest: "{{db2_binary.dest}}"
+    copy: no
+    creates: "{{db2_binary.dest}}/server"

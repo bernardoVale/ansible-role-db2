@@ -24,7 +24,7 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "test.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      #ansible.tags = "setup"
+      ansible.tags = "download"
     end
     ol.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
@@ -40,6 +40,9 @@ Vagrant.configure(2) do |config|
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "setup"
+      ansible.extra_vars = {
+        yum_repo: "http://public-yum.oracle.com/public-yum-ol7.repo"
+      }
     end
   end
 

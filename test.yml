@@ -4,3 +4,11 @@
     roles:
       - { role: Stouts.limits, tags: [ 'limits' ] }
       - db2
+    tasks:
+
+      # This is required to test on RedHat. (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
