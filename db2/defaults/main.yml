@@ -24,3 +24,23 @@ yum_repo: http://public-yum.oracle.com/public-yum-ol6.repo
 db2_binary:
   location: "/vagrant/db2_10503.tar.gz"
   dest: "/tmp"
+
+# Response file keywords: https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
+resp:
+  prod: "DB2_SERVER_EDITION"
+  file: "/opt/ibm/db2/V10.5"
+  lic_agreement: "ACCEPT" # ACCEPT or DECLINE
+  install_type: "TYPICAL" # TYPICAL, COMPACT, CUSTOM
+
+# This controls if the role should cache yum/apt
+make_cache: no
+
+# List of instances to be created
+# NOTE: root installation is required
+db2_instances:
+  #Those five params are mandatory to create a DB2 instance
+  instance: "DB2INST"
+  name: "db2inst1"
+  group_name: "db2iadm1"
+  fenced_username: "db2fenc1"
+  fenced_group_name: "db2fadm1"

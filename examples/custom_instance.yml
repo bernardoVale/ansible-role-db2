@@ -1,0 +1,33 @@
+---
+#In this example we are creating a custom instance 
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+    roles:
+      - { role: Stouts.limits, tags: [ 'limits' ] }
+      - db2
+    vars:
+      # Set the variable db2_instances
+      db2_instances:
+        instance: "DB2_INST" # This is the identifier of the instance inside the response file
+        # NOTE: instance/fenced name and group lengths must be less than or equal to 8
+        # http://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.admin.dbobj.doc/doc/c0007246.html
+        name: "myinstan" 
+        group_name: "myinadm"
+        fenced_username: "db2fenc1"
+        fenced_group_name: "db2fadm1"
+        # Read Instance specifications on the website above to get a list of all optionals parameters related to a DB2 instance:
+        # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
+        options:
+          password: "oracle" # db2inst1 password
+          autostart: "YES" # YES or NO
+          start_during_install: "YES" # YES or NO
+          # uid and gid for instance user
+          uid: 999
+          gid: 987

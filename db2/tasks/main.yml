@@ -2,7 +2,6 @@
   - include: get_db2.yml
     tags: download
 
-
   - name: Disabling SELinux
     selinux: state=disabled
     tags: setup
@@ -21,12 +20,12 @@
     tags: license
 
   - name: Installing DB2 pre requisites packages
-    yum: name={{item}} state=installed update_cache=yes disable_gpg_check=yes
+    yum: name={{item}} state=installed update_cache={{make_cache}} disable_gpg_check=yes
     with_items: db2_packages
     tags: packages
 
   - name: Running DB2 Pre Requisits Check
-    command: /tmp/server/db2prereqcheck -i -s
+    command: "{{db2_binary.dest}}/server/db2prereqcheck -i -s"
     register: precheck
     failed_when: "'failed' in precheck.stderr"
     changed_when: False 
@@ -35,32 +34,32 @@
   - name: Creating DB2 groups
     group: name={{item}} state=present
     with_items:
-      - db2iadm1
+#      - db2iadm1
       - db2fadm1
     tags: setup
 
-  # A senha criptografada é oracle
-  - name: Adding DB2 DB2INST1 user
-    user: name=db2inst1 comment="DB2 Instance user" group=db2iadm1 uid=1004 password=ldUMKEu7/QCAY home=/home/db2inst1
-    tags: setup
+  # # A senha criptografada é oracle
+  # - name: Adding DB2 DB2INST1 user
+  #   user: name=db2inst1 comment="DB2 Instance user" group=db2iadm1 uid=1004 password=ldUMKEu7/QCAY home=/home/db2inst1
+  #   tags: setup
 
   - name: Adding DB2 DB2FENC1 user
     user: name=db2fenc1 comment="DB2 Fenced user" group=db2fadm1 uid=1003 password=ldUMKEu7/QCAY home=/home/db2fenc1
     tags: setup 
 
+  - name: Parse response file
+    template: src=db2server.j2.rsp dest=/tmp/db2server.rsp
+    tags: parse
+
   - name: Installing DB2 10.5
-    command: /tmp/server/db2setup -r /vagrant/db2/files/db2server.rsp
+    command: "{{db2_binary.dest}}/server/db2setup -r /tmp/db2server.rsp"
     args: 
-      creates: /opt/ibm/db2/V10.5
+      creates: "{{resp.file}}"
     tags: install
 
   - name: Validating the current installation
-    command: /opt/ibm/db2/V10.5/bin/db2val -o
+    command: "{{resp.file}}/bin/db2val -o"
     register: db2_val
     failed_when: "'DBI1335I' not in db2_val.stdout"
     changed_when: False
     tags: ['install', 'validate']
-
-  - debug:
-      msg: "{{db2_binary.dest}}"
-    tags: test

@@ -1,0 +1,32 @@
+---
+#In this example we are creating an instance and also setting DB2 CFG DBM custom parameters
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+    roles:
+      - { role: Stouts.limits, tags: [ 'limits' ] }
+      - db2
+    vars:
+      db2_instances:
+        instance: "DB2INST"
+        name: "capei"
+        group_name: "capudo"
+        home_directory:
+        password: "oracle"
+        autostart: "YES" # YES or NO
+        start_during_install: "YES" # YES or NO
+        fenced_username: "db2fenc1"
+        fenced_group_name: "db2fadm1"
+        #Custom DBM CFG parameters
+        # Define db2_params and just drop key: value
+        dbm_params:
+          # Should be a valid DBM CFG Parameter
+          # 10.5 parameters list http://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.admin.config.doc/doc/r0005181.html
+          intra_parallel: "YES"
+          numdb: "20"

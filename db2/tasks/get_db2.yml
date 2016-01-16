@@ -1,5 +1,5 @@
 ---
-#Download a DB2 copy
+#Download a DB2 copy from a custom URL (Could be a http, an ftp whatever.)
 - name: Downloading DB2
   get_url:
     url: "{{db2_binary.url}}"
