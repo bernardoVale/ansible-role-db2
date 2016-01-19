@@ -3,3 +3,6 @@
 #Big files
 *.zip
 *.tar.gz
+
+#My examples
+examples/test_*.yml

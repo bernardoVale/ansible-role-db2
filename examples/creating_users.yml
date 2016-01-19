@@ -1,5 +1,5 @@
 ---
-#In this example we are creating a custom instance 
+#In this example DB2 Setup will create both instance user and fenced because we provided user,group and password for both users. 
   - hosts: all
     gather_facts: True
     pre_tasks:
@@ -24,11 +24,7 @@
         fenced_group_name: "myfadm1"
         # Read Instance specifications on the website above to get a list of all optionals parameters related to a DB2 instance:
         # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
-        #To create an instance for an existing user, do not specify the PASSWORD, UID, GID, GROUP_NAME, or HOME_DIRECTORY keywords. To create the user or the fenced user, you must specify all of the previous keywords in the db2setup command
         options:
           password: "oracle" # myinstan password
-          autostart: "YES" # YES or NO
-          start_during_install: "YES" # YES or NO
-          # uid and gid for instance user
-          uid: 999
-          gid: 987
+          fenced_password: "oracle" #fenced user password
+          

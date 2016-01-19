@@ -2,6 +2,9 @@
   - include: get_db2.yml
     tags: download
 
+  - include: instance_users.yml
+    tags: ['users', 'setup']
+
   - name: Disabling SELinux
     selinux: state=disabled
     tags: setup
@@ -13,16 +16,10 @@
       line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }}"
     tags: setup
 
-  - name: Downloading license key FTP da LB2
-    get_url:
-      url: ftp://transfer.lb2.com.br/downloads/connections/DB2_ESE_AUSI_QS_Activ_10.5.0.5.zip
-      dest: /vagrant/db2_key.zip
-    tags: license
-
   - name: Installing DB2 pre requisites packages
     yum: name={{item}} state=installed update_cache={{make_cache}} disable_gpg_check=yes
     with_items: db2_packages
-    tags: packages
+    tags: ['packages', 'setup']
 
   - name: Running DB2 Pre Requisits Check
     command: "{{db2_binary.dest}}/server/db2prereqcheck -i -s"
@@ -30,22 +27,6 @@
     failed_when: "'failed' in precheck.stderr"
     changed_when: False 
     tags: setup
-
-  - name: Creating DB2 groups
-    group: name={{item}} state=present
-    with_items:
-#      - db2iadm1
-      - db2fadm1
-    tags: setup
-
-  # # A senha criptografada é oracle
-  # - name: Adding DB2 DB2INST1 user
-  #   user: name=db2inst1 comment="DB2 Instance user" group=db2iadm1 uid=1004 password=ldUMKEu7/QCAY home=/home/db2inst1
-  #   tags: setup
-
-  - name: Adding DB2 DB2FENC1 user
-    user: name=db2fenc1 comment="DB2 Fenced user" group=db2fadm1 uid=1003 password=ldUMKEu7/QCAY home=/home/db2fenc1
-    tags: setup 
 
   - name: Parse response file
     template: src=db2server.j2.rsp dest=/tmp/db2server.rsp
