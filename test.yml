@@ -1,14 +1,18 @@
 ---
   - hosts: all
-    gather_facts: True
-    roles:
-      - { role: Stouts.limits, tags: [ 'limits' ] }
-      - db2
+    gather_facts: False
     tasks:
 
       # This is required to test on RedHat. (No license on vagrant)
-      - name: Installing OL Public repository
-        get_url: 
-          url: "{{yum_repo}}"
-          dest: /etc/yum.repos.d/public-yum-release.repo
-        tags: download
+      - name: My Async command
+        command: "sleep 5"
+        async: 1000
+        poll: 0
+        register: yum_sleeper
+
+      - name: Check async
+        async_status: jid={{ yum_sleeper.ansible_job_id }}
+        register: job_result
+        until: job_result.finished
+        retries: 30
+        delay: 5

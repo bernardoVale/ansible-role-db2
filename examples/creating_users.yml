@@ -24,6 +24,7 @@
         fenced_group_name: "myfadm1"
         # Read Instance specifications on the website above to get a list of all optionals parameters related to a DB2 instance:
         # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
+        # If you want you can also provide home directory and uid/gid.
         options:
           password: "oracle" # myinstan password
           fenced_password: "oracle" #fenced user password

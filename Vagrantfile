@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
     ol.vm.box = "terrywang/oraclelinux-6-x86_64"
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
-      #ansible.playbook = "download_db2.yml"
+      #ansible.playbook = "test.yml"
       ansible.playbook = "examples/global_profile.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
