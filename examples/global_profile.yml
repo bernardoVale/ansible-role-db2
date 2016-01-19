@@ -1,0 +1,30 @@
+---
+#In this example we are creating an instance and also defining global profile parameters 
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+    roles:
+      - { role: Stouts.limits, tags: [ 'limits' ] }
+      - db2
+    vars:
+      # Set the variable db2_instances
+      db2_instances:
+        # Read Instance specifications on the website above:
+        # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
+        instance: "DB2INST"
+        name: "db2inst1"
+        group_name: "db2iadm1"
+        # NOTE: THIS USER MUST BE CREATED BEFORE THE DB2 INSTALLATION
+        fenced_username: "fencusr1"
+        fenced_group_name: "fencgrp1"
+      # Define global_params hash
+      global_params:
+        db2_antijoin: "YES"
+        db2fcmcomm: "TCPIP4"
+        

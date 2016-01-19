@@ -7,10 +7,10 @@ Vagrant.configure(2) do |config|
     redhat.vm.hostname = "redhat-db2"
     #redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/creating_users.yml"
+      ansible.playbook = "examples/test_redhat.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      ansible.tags = "users"
+      #ansible.tags = "users"
     end
     redhat.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
       #ansible.playbook = "download_db2.yml"
-      ansible.playbook = "examples/creating_users.yml"
+      ansible.playbook = "examples/global_profile.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "parse"
