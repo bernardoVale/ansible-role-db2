@@ -39,8 +39,8 @@ make_cache: no
 # NOTE: root installation is required
 db2_instances:
   #Those five params are mandatory to create a DB2 instance
-  instance: "DB2INST"
-  name: "db2inst1"
-  group_name: "db2iadm1"
-  fenced_username: "db2fenc1"
-  fenced_group_name: "db2fadm1"
+  - instance: "DB2INST"
+    name: "db2inst1"
+    group_name: "db2iadm1"
+    fenced_username: "db2fenc1"
+    fenced_group_name: "db2fadm1"

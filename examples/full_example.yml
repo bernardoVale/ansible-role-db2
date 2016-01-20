@@ -1,0 +1,49 @@
+---
+# This is the most rich example, with all posible customizations
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant, so no packages available)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+
+    roles:
+      - { role: Stouts.limits, tags: [ 'limits' ] }
+      - db2
+    vars:
+       # Define the db2_binary and setup the URL to download.
+       # Variable location define where should put db2 on ansible machine
+       # Variable dest define where should decompress DB2 on remote host
+      db2_binary:
+        url: "ftp://transfer.lb2.com.br/downloads/connections/DB2_Svr_10.5.0.3_Linux_x86-64.tar.gz"
+        location: "/vagrant/db2_10503.tar.gz"
+        dest: "/tmp"
+
+      global_params:
+        db2_antijoin: "YES"
+        db2fcmcomm: "TCPIP4"
+      
+      db2_instances:
+        - instance: "DB2INST"
+          name: "db2inst1"
+          group_name: "db2iadm1"
+          fenced_username: "db2fenc1"
+          fenced_group_name: "db2fadm1"
+          dbm_params:
+            intra_parallel: "YES"
+            numdb: "15"
+
+        - instance: "DB2INST2"
+          name: "db2inst2"
+          group_name: "db2iadm2"
+          fenced_username: "db2fenc2"
+          fenced_group_name: "db2fadm2"
+          dbm_params:
+            intra_parallel: "NO"
+            numdb: "25"
+          options:
+            password: "oracle" 
+            fenced_password: "oracle"

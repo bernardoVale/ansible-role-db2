@@ -22,30 +22,39 @@ INSTALL_TYPE              = {{resp.install_type}}
 *LANG                     = RU              ** Russian (ru_RU)
 *LANG                     = TW              ** Traditional Chinese (zh_TW)
 
+
+{%for inst in db2_instances %}
+
 ** Instance Creation Settings
 ** --------------------------
-INSTANCE                  = {{db2_instances.instance}}
-{{db2_instances.instance}}.NAME             = {{db2_instances.name}} 
-{{db2_instances.instance}}.GROUP_NAME              = {{db2_instances.group_name}} 
+INSTANCE                  = {{inst.instance}}
+{{inst.instance}}.NAME             = {{inst.name}} 
+{{inst.instance}}.GROUP_NAME              = {{inst.group_name}} 
+{{inst.instance}}.FENCED_USERNAME  = {{inst.fenced_username}}
+{{inst.instance}}.FENCED_GROUP_NAME = {{inst.fenced_group_name}}
 
-** Fenced User Creation Settings
-** -----------------------------
-{{db2_instances.instance}}.FENCED_USERNAME  = {{db2_instances.fenced_username}}
-{{db2_instances.instance}}.FENCED_GROUP_NAME = {{db2_instances.fenced_group_name}}
-
-{%if db2_instances.options is defined %}
+{%if inst.options is defined %}
 ** Instance Optionals
 ** ---------------------------
-{% for key, value in db2_instances.options.iteritems() %}
-{{db2_instances.instance | upper}}.{{ key | upper}}             = {{ value }}
+{% for key, value in inst.options.iteritems() %}
+{{inst.instance | upper}}.{{ key | upper}}             = {{ value }}
 {% endfor %}
 {% endif %}
 
-{% if db2_instances.dbm_params is defined %}
+{% if inst.dbm_params is defined %}
 ** Instance DBM CFG Settings
 ** -------------------------
-{% for key, value in db2_instances.dbm_params.iteritems() %}
-{{db2_instances.instance | upper}}.{{ key | upper}}             = {{ value }}
+{% for key, value in inst.dbm_params.iteritems() %}
+{{inst.instance | upper}}.{{ key | upper}}             = {{ value }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+{%if global_params is defined %}
+** Global Profile Registry Settings
+** --------------------------------
+{% for key, value in global_params.iteritems() %}
+{{ key | upper}}             = {{ value }}
 {% endfor %}
 {% endif %}
 
@@ -187,14 +196,6 @@ INSTANCE                  = {{db2_instances.instance}}
 *DB2_INST.DB2_UTIL_MSGPATH = instanceName/tmp directory ** BLANK or char()
 *DB2_INST.DB2_WORKLOAD    = Not set         ** BLANK, SAP
 
-
-{%if global_params is defined %}
-** Global Profile Registry Settings
-** --------------------------------
-{% for key, value in global_params.iteritems() %}
-{{ key | upper}}             = {{ value }}
-{% endfor %}
-{% endif %}
 
 ** Database Settings
 ** -----------------

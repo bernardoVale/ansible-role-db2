@@ -4,25 +4,29 @@
 # TODO: Use the new block feature since `when` clause is equal on all tasks
 
 - name: Creating DB2 Fenced Groups
-  group: name="{{db2_instances.fenced_group_name}}" state=present
-  when: db2_instances.options is not defined or db2_instances.options.fenced_password is not defined
+  group: name="{{item.fenced_group_name}}" state=present
+  when: item.options is not defined or item.options.fenced_password is not defined
+  with_items: db2_instances
 
 - name: Creating DB2 Instance Groups
-  group: name="{{db2_instances.group_name}}" state=present
-  when: db2_instances.options is not defined or db2_instances.options.password is not defined
+  group: name="{{item.group_name}}" state=present
+  when: item.options is not defined or item.options.password is not defined
+  with_items: db2_instances
 
 - name: Creating DB2 Instance Users
   user:
-    name: "{{db2_instances.name}}"
-    group: "{{db2_instances.group_name}}"
+    name: "{{item.name}}"
+    group: "{{item.group_name}}"
     password: ldUMKEu7/QCAY
-    home: "/home/{{db2_instances.name}}"
-  when: db2_instances.options is not defined or db2_instances.options.password is not defined
+    home: "/home/{{item.name}}"
+  when: item.options is not defined or item.options.password is not defined
+  with_items: db2_instances
 
 - name: Creating DB2 Fenced Users
   user:
-    name: "{{db2_instances.fenced_username}}"
-    group: "{{db2_instances.fenced_group_name}}"
+    name: "{{item.fenced_username}}"
+    group: "{{item.fenced_group_name}}"
     password: ldUMKEu7/QCAY
-    home: "/home/{{db2_instances.fenced_username}}"
-  when: db2_instances.options is not defined or db2_instances.options.fenced_password is not defined
+    home: "/home/{{item.fenced_username}}"
+  when: item.options is not defined or item.options.fenced_password is not defined
+  with_items: db2_instances
