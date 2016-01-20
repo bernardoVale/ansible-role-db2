@@ -13,18 +13,8 @@
       - { role: Stouts.limits, tags: [ 'limits' ] }
       - db2
     vars:
-      # Set the variable db2_instances
-      db2_instances:
-        # Read Instance specifications on the website above:
-        # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
-        instance: "DB2INST"
-        name: "db2inst1"
-        group_name: "db2iadm1"
-        # NOTE: THIS USER MUST BE CREATED BEFORE THE DB2 INSTALLATION
-        fenced_username: "fencusr1"
-        fenced_group_name: "fencgrp1"
       # Define global_params hash
+      # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.admin.regvars.doc/doc/c0007340.html?cp=SSEPGG_10.5.0%2F2-4-5-4
       global_params:
         db2_antijoin: "YES"
         db2fcmcomm: "TCPIP4"
-        

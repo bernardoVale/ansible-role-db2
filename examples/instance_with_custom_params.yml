@@ -13,16 +13,11 @@
       - { role: Stouts.limits, tags: [ 'limits' ] }
       - db2
     vars:
-      db2_instances:
-        instance: "DB2INST"
-        name: "capei"
-        group_name: "capudo"
-        home_directory:
-        password: "oracle"
-        autostart: "YES" # YES or NO
-        start_during_install: "YES" # YES or NO
-        fenced_username: "db2fenc1"
-        fenced_group_name: "db2fadm1"
+      - instance: "DB2INST"
+        name: "myinstan" 
+        group_name: "myinadm"
+        fenced_username: "myfenc1"
+        fenced_group_name: "myfadm1"
         #Custom DBM CFG parameters
         # Define db2_params and just drop key: value
         dbm_params:

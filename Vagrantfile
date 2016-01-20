@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
     redhat.vm.hostname = "redhat-db2"
     #redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/full_example.yml"
+      ansible.playbook = "examples/creating_users.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "parse"

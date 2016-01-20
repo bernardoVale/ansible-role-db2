@@ -14,17 +14,14 @@
       - db2
     vars:
       # Set the variable db2_instances
-      db2_instances:
-        instance: "DB2_INST" # This is the identifier of the instance inside the response file
-        # NOTE: instance/fenced name and group lengths must be less than or equal to 8
-        # http://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.admin.dbobj.doc/doc/c0007246.html
+      # This is the identifier of the instance inside the response file
+      - instance: "DB2INST"
         name: "myinstan" 
         group_name: "myinadm"
         fenced_username: "myfenc1"
         fenced_group_name: "myfadm1"
         # Read Instance specifications on the website above to get a list of all optionals parameters related to a DB2 instance:
         # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
-        #To create an instance for an existing user, do not specify the PASSWORD, UID, GID, GROUP_NAME, or HOME_DIRECTORY keywords. To create the user or the fenced user, you must specify all of the previous keywords in the db2setup command
         options:
           password: "oracle" # myinstan password
           autostart: "YES" # YES or NO
