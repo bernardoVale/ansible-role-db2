@@ -1,15 +1,10 @@
 ---
   - name: Installing DB2 pre requisites packages
-    yum: name={{item}} state=installed update_cache={{make_cache}} disable_gpg_check=yes
+    yum: name="{{ ','.join(db2_packages) }}" state=installed update_cache={{make_cache}} disable_gpg_check=yes
     async: 1800
     poll: 0    
     register: yum_sleeper
-    with_items: db2_packages
     tags: ['packages', 'setup']
-
-  - name: Testing
-    debug:
-      var: yum_sleeper
 
   - include: get_db2.yml
     tags: download
@@ -29,7 +24,7 @@
     tags: setup
 
   - name: 'Check Pre requisites packages'
-    async_status: jid={{ yum_sleeper.results[0].ansible_job_id }}
+    async_status: jid={{ yum_sleeper.ansible_job_id }}
     register: job_result
     until: job_result.finished
     retries: 120
