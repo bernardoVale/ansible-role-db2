@@ -10,18 +10,18 @@
           dest: /etc/yum.repos.d/public-yum-release.repo
         tags: download
     roles:
-      - { role: Stouts.limits, tags: [ 'limits' ] }
       - db2
     vars:
-      - instance: "DB2INST"
-        name: "myinstan" 
-        group_name: "myinadm"
-        fenced_username: "myfenc1"
-        fenced_group_name: "myfadm1"
-        #Custom DBM CFG parameters
-        # Define db2_params and just drop key: value
-        dbm_params:
-          # Should be a valid DBM CFG Parameter
-          # 10.5 parameters list http://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.admin.config.doc/doc/r0005181.html
-          intra_parallel: "YES"
-          numdb: "20"
+      db2_instances:
+        - instance: "DB2INST"
+          name: "myinstan" 
+          group_name: "myinadm"
+          fenced_username: "myfenc1"
+          fenced_group_name: "myfadm1"
+          #Custom DBM CFG parameters
+          # Define db2_params and just drop key: value
+          dbm_params:
+            # Should be a valid DBM CFG Parameter
+            # 10.5 parameters list http://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.admin.config.doc/doc/r0005181.html
+            intra_parallel: "YES"
+            numdb: "20"

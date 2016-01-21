@@ -11,3 +11,12 @@ script:
 
   # Syntax check
   - "ansible-playbook -i localhost, examples/full_example.yml --syntax-check"
+
+  # Run role
+  - "ansible-playbook -i localhost, examples/full_example.yml --connection=local --tags parse"
+  # Idempotency check
+  - >
+    ansible-playbook -i localhost, examples/full_example.yml --connection=local --tags parse
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotency: PASS' && exit 0)
+    || (echo 'Idempotency: FAIL' && exit 1)
