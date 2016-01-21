@@ -41,6 +41,31 @@ INSTANCE                  = {{inst.instance}}
 {% endfor %}
 {% endif %}
 
+{%if inst.databases is defined %}
+** Database Settings
+** -----------------
+
+{%for db in inst.databases %}
+** Database {{db.database | upper}}
+** -----------------
+DATABASE                 = {{db.database}}
+{{db.database}}.DATABASE_NAME                 = {{db.name}}
+{{db.database}}.INSTANCE                 = {{inst.instance}}
+{{db.database}}.LOCATION                 = local
+
+{% endfor %}
+
+*databas1.ALIAS           =                 ** alias of databas1: char(8) no spaces and can not start with SYS, DBM or IBM
+*databas1.LOCATION        =                 ** local, remote, LOCAL or REMOTE; For client only product use remote or REMOTE
+*databas1.SYSTEM_NAME     =                 ** some remote host char(64) no spaces: for LOCATION=remote only
+*databas1.AUTHENTICATION  =                 ** CLIENT, SERVER, SERVER_ENCRYPT: optional
+*databas1.PATH            =                 ** the directory for the database: optional
+*databas1.SVCENAME        =                 ** service1: for remote LOCATION only
+*databas1.USERNAME        =                 ** db2user: char(8)  no spaces
+*databas1.PASSWORD        =                 ** db2pwd: char(8)  no spaces
+
+{% endif %}
+
 {% if inst.dbm_params is defined %}
 ** Instance DBM CFG Settings
 ** -------------------------

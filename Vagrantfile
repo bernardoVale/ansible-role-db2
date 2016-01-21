@@ -4,10 +4,10 @@ Vagrant.configure(2) do |config|
   # RedHat 6.5
   config.vm.define "redhat", primary: true do |redhat|
     redhat.vm.box = "anandbitra/redhat-6.5"
-    redhat.vm.hostname = "redhat-db2"
-    #redhat.vm.network "private_network", ip: "10.0.2.15"
+    redhat.vm.hostname = "redhat"
+    redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/custom_instance.yml"
+      ansible.playbook = "examples/databases.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "parse"

@@ -1,0 +1,25 @@
+---
+#In this example we are creating a custom instance 
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+    roles:
+      - db2
+    vars:
+      db2_instances:
+        - instance: "DB2INST"
+          name: "db2inst1" 
+          group_name: "db2iadm1"
+          fenced_username: "db2fenc1"
+          fenced_group_name: "db2fadm1"
+          databases:
+            - database: "databas1"
+              name: "teste"
+            - database: "databas2"
+              name: "capa"
