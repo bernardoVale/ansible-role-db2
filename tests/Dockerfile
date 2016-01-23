@@ -7,7 +7,7 @@ RUN curl https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
 yum install -y epel-release-latest-7.noarch.rpm; \
 yum install -y glibc.i686; \
 rm -rf epel-release-latest-7.noarch.rpm; \
-yum install -y unzip tar python-setuptools libselinux-python python2-crypto git sudo; \
+yum install -y unzip tar file python-setuptools libselinux-python python2-crypto git sudo; \
 easy_install ansible; \
 sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
 mkdir /etc/ansible; \
