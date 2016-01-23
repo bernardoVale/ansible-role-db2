@@ -1,14 +1,25 @@
 ---
 language: python
 python: "2.7"
+services:
+  - docker
 before_install:
-  - sudo apt-get update -qq
-install:
-  - pip install ansible
+  # Pull container
+  - 'sudo docker pull oraclelinux:7.2'
+  # Customize container
+  - 'sudo docker build --rm=true --file=tests/Dockerfile --tag=ol7-db2:latest tests'
+
 script:
   # Prepare tests
   - echo localhost > inventory
+  - container_id=$(mktemp)
 
+    # Run container in detached state
+  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles ol7-db2:latest "/sbin/init" > "${container_id}"'
+
+  # Syntax under docker 
+  - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/examples/full_example.yml --syntax-check'
+  
   # Syntax check
   - "ansible-playbook -i localhost, examples/full_example.yml --syntax-check"
 
