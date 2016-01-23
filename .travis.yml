@@ -18,6 +18,3 @@ script:
 
   # Syntax under docker 
   - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/examples/full_example.yml --syntax-check'
-  
-  # Syntax check
-  - "ansible-playbook -i localhost, examples/full_example.yml --syntax-check"
