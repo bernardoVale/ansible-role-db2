@@ -5,6 +5,7 @@ RUN curl ftp://transfer.lb2.com.br/downloads/connections/DB2_Svr_10.5.0.3_Linux_
 # Install Ansible and dependences
 RUN curl https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -o epel-release-latest-7.noarch.rpm; \
 yum install -y epel-release-latest-7.noarch.rpm; \
+yum install -y glibc.i686; \
 rm -rf epel-release-latest-7.noarch.rpm; \
 yum install -y unzip tar python-setuptools libselinux-python python2-crypto git sudo; \
 easy_install ansible; \
