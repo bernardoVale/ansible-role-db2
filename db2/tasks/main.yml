@@ -14,7 +14,7 @@
 
   - name: Disabling SELinux
     selinux: state=disabled
-    tags: setup
+    tags: ['selinux', 'setup']
 
   - name: Adding entry to /etc/hosts
     lineinfile:

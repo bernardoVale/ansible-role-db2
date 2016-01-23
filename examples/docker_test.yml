@@ -5,6 +5,7 @@
     roles:
       - db2
     vars:
+      yum_repo: "http://public-yum.oracle.com/public-yum-ol7.repo"
       # The binary will be downloaded on Docker build -- see .travis.yml and tests/Dockerfile
       db2_binary:
         location: "/tmp/db2.tar.gz"

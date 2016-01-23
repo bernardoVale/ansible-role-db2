@@ -6,7 +6,7 @@ RUN curl ftp://transfer.lb2.com.br/downloads/connections/DB2_Svr_10.5.0.3_Linux_
 RUN curl https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -o epel-release-latest-7.noarch.rpm; \
 yum install -y epel-release-latest-7.noarch.rpm; \
 rm -rf epel-release-latest-7.noarch.rpm; \
-yum install -y python-setuptools libselinux-python python2-crypto git sudo; \
+yum install -y unzip python-setuptools libselinux-python python2-crypto git sudo; \
 easy_install ansible; \
 sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
 mkdir /etc/ansible; \
