@@ -18,3 +18,5 @@ script:
 
   # Syntax under docker 
   - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/examples/full_example.yml --syntax-check'
+  # Check if it downloaded the binary
+  - 'sudo docker exec --tty "$(cat ${container_id})" env ls /tmp/db2.tar.gz'
