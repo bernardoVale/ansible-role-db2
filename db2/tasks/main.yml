@@ -14,14 +14,14 @@
 
   - name: Disabling SELinux
     selinux: state=disabled
-    tags: ['selinux', 'setup']
+    tags: ['dont-on-docker', 'setup']
 
   - name: Adding entry to /etc/hosts
     lineinfile:
       dest: /etc/hosts
       regexp: "^{{ ansible_default_ipv4.address }} {{ ansible_hostname }}$"
       line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }}"
-    tags: setup
+    tags: ['dont-on-docker', 'setup']
 
   - name: 'Check Pre requisites packages'
     async_status: jid={{ yum_sleeper.ansible_job_id }}
