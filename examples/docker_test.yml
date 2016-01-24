@@ -1,0 +1,38 @@
+---
+# This is used to test the role inside Docker
+  - hosts: all
+    gather_facts: True
+    roles:
+      - db2
+    vars:
+      yum_repo: "http://public-yum.oracle.com/public-yum-ol7.repo"
+      # The binary will be downloaded on Docker build -- see .travis.yml and tests/Dockerfile
+      db2_binary:
+        location: "/tmp/db2.tar.gz"
+        dest: "/tmp"
+
+      global_params:
+        db2_antijoin: "YES"
+        db2fcmcomm: "TCPIP4"
+      
+      db2_instances:
+        - instance: "DB2INST"
+          name: "db2inst1"
+          group_name: "db2iadm1"
+          fenced_username: "db2fenc1"
+          fenced_group_name: "db2fadm1"
+          dbm_params:
+            intra_parallel: "YES"
+            numdb: "15"
+
+        - instance: "DB2INST2"
+          name: "db2inst2"
+          group_name: "db2iadm2"
+          fenced_username: "db2fenc2"
+          fenced_group_name: "db2fadm2"
+          dbm_params:
+            intra_parallel: "NO"
+            numdb: "25"
+          options:
+            password: "oracle" 
+            fenced_password: "oracle"

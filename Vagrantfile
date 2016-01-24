@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "examples/databases.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      #ansible.tags = "parse"
+      ansible.tags = "parse"
     end
     redhat.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "examples/custom_instance.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      #ansible.tags = "parse"
+      ansible.tags = "download"
     end
     ol.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
