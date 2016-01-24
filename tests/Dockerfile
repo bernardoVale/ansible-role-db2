@@ -10,7 +10,7 @@ rm -rf epel-release-latest-7.noarch.rpm; \
 yum install -y unzip tar file python-setuptools libselinux-python python2-crypto git sudo; \
 easy_install ansible; \
 sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
-mkdir /etc/ansible; \
+mkdir -p /etc/ansible/roles; \
 echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 CMD ["/usr/sbin/init"]

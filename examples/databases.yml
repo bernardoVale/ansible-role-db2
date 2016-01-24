@@ -20,6 +20,6 @@
           fenced_group_name: "db2fadm1"
           databases:
             - database: "databas1"
-              name: "teste"
+              name: "testdb"
             - database: "databas2"
-              name: "capa"
+              name: "testdb2"
