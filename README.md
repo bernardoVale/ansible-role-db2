@@ -7,6 +7,8 @@ Requirements
 ------------
 You need a copy of DB2 compressed. The role can download from a remote URL or use a local copy of DB2 present on your ansible host.
 
+There are some options that can only be acomplish installing DB2 as **root**. All then are documented on [examples](examples/)
+
 Role Variables
 --------------
 
@@ -22,7 +24,7 @@ This hash controls how to send the DB2 binary to the remote hosts.
 
 
     db2_binary:
-        url: htttps://mycompany.com/downloads/db2_10_5.tar.gz
+        url: https://mycompany.com/downloads/db2_10_5.tar.gz
         location: /ansible/files/db2_10.5.tar.gz
         dest: /tmp
         
@@ -31,7 +33,7 @@ This hash controls how to send the DB2 binary to the remote hosts.
  
  If you have a local copy use this [example](examples/local_db2.yml)
 
-**DB2_PACKAGES**
+###DB2_PACKAGES
 
 The list of packages that the role should install before running the installer. Leave as default unless you know what you're doing.
 
@@ -63,6 +65,8 @@ None
 
 Example Playbook
 ----------------
+All custom options are provided through an example file on [examples folder](examples/)
+
 
 You need at least tell us where to get DB2. [Downloading db2](examples/downloading_db2.yml)
 
