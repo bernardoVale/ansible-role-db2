@@ -1,13 +1,11 @@
 ---
-  - name: Installing DB2 pre requisites packages
-    yum: name="{{ ','.join(db2_packages) }}" state=installed update_cache={{make_cache}} disable_gpg_check=yes
-    async: 1800
-    poll: 0    
-    register: yum_sleeper
-    tags: ['packages', 'setup']
-
   - include: get_db2.yml
     tags: download
+
+  - name: Installing DB2 pre requisites packages
+    yum: name="{{ item }}" state=installed update_cache={{make_cache}} disable_gpg_check=yes
+    tags: ['packages', 'setup']
+    with_items: db2_packages
 
   - include: instance_users.yml
     tags: ['users', 'setup']
@@ -22,13 +20,6 @@
       regexp: "^{{ ansible_default_ipv4.address }} {{ ansible_hostname }}$"
       line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }}"
     tags: ['dont-on-docker', 'setup']
-
-  - name: 'Check Pre requisites packages'
-    async_status: jid={{ yum_sleeper.ansible_job_id }}
-    register: job_result
-    until: job_result.finished
-    retries: 120
-    delay: 10
 
   - name: Running DB2 Pre Requisits Check
     command: "{{db2_binary.dest}}/server/db2prereqcheck -i -s"

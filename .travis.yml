@@ -14,20 +14,20 @@ script:
   - container_id=$(mktemp)
 
     # Run container in detached state
-  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles ol7-db2:latest "/sbin/init" > "${container_id}"'
+  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/db2 ol7-db2:latest "/sbin/init" > "${container_id}"'
 
   # Syntax under docker 
-  - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/examples/full_example.yml --syntax-check'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/db2/examples/full_example.yml --syntax-check'
 
   # Check if it downloaded the binary
   - 'sudo docker exec --tty "$(cat ${container_id})" env ls /tmp/db2.tar.gz'
 
   # Run playbook
-  - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/examples/docker_test.yml --skip-tags dont-on-docker'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env ansible-playbook /etc/ansible/roles/db2/examples/docker_test.yml --skip-tags dont-on-docker'
 
   # Test role idempotence.
   - >
-    sudo docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/examples/docker_test.yml --skip-tags dont-on-docker
+    sudo docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/db2/examples/docker_test.yml --skip-tags dont-on-docker
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)

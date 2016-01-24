@@ -1,5 +1,5 @@
 ---
-# In this example we're using the url variable to download DB2 binaries
+# In this example we're setting up two DB2 instances
   - hosts: all
     gather_facts: True
     pre_tasks:

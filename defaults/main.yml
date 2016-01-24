@@ -5,23 +5,15 @@ db2_packages:
  - libaio
  - compat-libstdc++-33.i686
  - compat-libstdc++-33
- #- libstdc++-devel.i686
+ - libstdc++-devel.i686
  - libstdc++
  - ksh
  - unzip
-# Security limits
-limits_path: /etc/security/limits.conf
-limits_limits:
-  - "* hard nofile 65536"
-  - "* soft nofile 65536"
-  - "* hard nproc 10000"
-  - "* soft nproc 10000"
 
 yum_repo: http://public-yum.oracle.com/public-yum-ol6.repo
-
 #Check download_db2.yml  to find how you can use this role to download a DB2 from a remote repo
 db2_binary:
-  location: "/vagrant/db2_10503.tar.gz"
+  location: "/vagrant/tests/db2_10503.tar.gz"
   dest: "/tmp"
 
 # Response file keywords: https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html

@@ -7,10 +7,10 @@ Vagrant.configure(2) do |config|
     redhat.vm.hostname = "redhat"
     redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/databases.yml"
+      ansible.playbook = "examples/global_profile.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      ansible.tags = "parse"
+      #ansible.tags = "parse"
     end
     redhat.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
@@ -22,11 +22,10 @@ Vagrant.configure(2) do |config|
     ol.vm.box = "terrywang/oraclelinux-6-x86_64"
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
-      #ansible.playbook = "test.yml"
-      ansible.playbook = "examples/custom_instance.yml"
+      ansible.playbook = "examples/multiples_instances.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      ansible.tags = "download"
+      #ansible.tags = "download"
     end
     ol.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
@@ -34,11 +33,12 @@ Vagrant.configure(2) do |config|
     end
   end
   # Oracle Linux 7
+  #Note: If you've trouble with this machine, disable USB controller on VirtualBox
   config.vm.define "ol7" do |ol|
     ol.vm.box = "jhcook/oel7"
     ol.vm.hostname = "oraclelinux7-db2"
     ol.vm.provision "ansible" do |ansible|
-      ansible.playbook = "test.yml"
+      ansible.playbook = "examples/full_example.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "setup"
