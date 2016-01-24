@@ -64,11 +64,85 @@ None
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+You need at least tell us where to get DB2. [Downloading db2](examples/downloading_db2.yml)
 
     - hosts: servers
       roles:
          - db2
+      vars:
+        db2_binary:
+          location: /ansible/files/db2_10.5.tar.gz
+           dest: /tmp
+
+###Creating a custom instance
+
+The instance will be created using all DB2 defaults, but you can customize it using the hash **db2_instances**
+
+The full example [here](examples/custom_instance.yml)
+
+    db2_instances:
+         - instance: "DB2INST"
+           name: "myinstan" 
+           group_name: "myinadm"
+           fenced_username: "myfenc1"
+           fenced_group_name: "myfadm1"
+           
+**db2_instances** is a list of instances, yo can create more than one, an example of two instances is found [here](examples/multiples_instances.yml)
+
+###Customizing Parameters
+
+Both global and instance parameters can be customized.
+
+Define hash `dbm_params` and set any `key: value` DB2 parameter. The key must be a valid DB2 parameter.
+
+    db2_instances:
+        - instance: "DB2INST"
+          name: "myinstan" 
+          group_name: "myinadm"
+          fenced_username: "myfenc1"
+          fenced_group_name: "myfadm1"
+          dbm_params:
+            intra_parallel: "YES"
+            numdb: "20"
+            
+The full example [here](examples/instance_with_custom_params.yml)
+
+### Global parameters
+
+Global parameters are provided by defining `global_params` hash.
+
+    global_params:
+        db2_antijoin: "YES"
+        db2fcmcomm: "TCPIP4"
+ 
+ The full example [here](examples/global_profile.yml)
+        
+
+###Creating databases
+
+By default this role won't create databases, if you want to, define the hash list `databases` to the instance.
+
+The full example is found [here](examples/databases.yml)
+
+    db2_instances:
+      - instance: "DB2INST"
+        name: "db2inst1" 
+        group_name: "db2iadm1"
+        fenced_username: "db2fenc1"
+        fenced_group_name: "db2fadm1"
+        databases:
+          - database: "databas1"
+            name: "testdb"
+          - database: "databas2"
+            name: "testdb2"
+
+Disclaimer
+---------
+There still some work to be done. There's no warranty that the role will work for you.
+
+Developing
+--------
+If you're insterested in helping I will be glad. Please full a issue or just send me a pull request.
 
 License
 -------
