@@ -1,7 +1,8 @@
 DB2
 =========
 
-Simple role to install IBM DB2
+
+Simple role to install IBM DB2 ![alt text](https://travis-ci.org/bernardoVale/ansible-role-db2.svg?branch=master "TravisCI Status")
 
 Requirements
 ------------
