@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
     redhat.vm.hostname = "redhat"
     redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/global_profile.yml"
+      ansible.playbook = "examples/full_example.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "parse"
@@ -41,7 +41,7 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "examples/full_example.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      #ansible.tags = "setup"
+      ansible.tags = "databases"
       ansible.extra_vars = {
         yum_repo: "http://public-yum.oracle.com/public-yum-ol7.repo"
       }

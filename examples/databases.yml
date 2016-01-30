@@ -12,14 +12,11 @@
     roles:
       - db2
     vars:
-      db2_instances:
-        - instance: "DB2INST"
-          name: "db2inst1" 
-          group_name: "db2iadm1"
-          fenced_username: "db2fenc1"
-          fenced_group_name: "db2fadm1"
-          databases:
-            - database: "databas1"
-              name: "testdb"
-            - database: "databas2"
-              name: "testdb2"
+      # Use databases hash to add databases to an instance
+      databases:
+        - instance: db2inst1
+          dbs:
+            - name: autodb
+              automatic: "yes"
+            - name: otherdb
+              automatic: "no"

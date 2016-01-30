@@ -24,7 +24,21 @@
       global_params:
         db2_antijoin: "YES"
         db2fcmcomm: "TCPIP4"
-      
+
+      databases:
+        - instance: db2inst2
+          dbs:
+            - name: testdb
+              automatic: "no"
+              pagesize: "32768"
+            - name: testing
+              pagesize: "16384"
+        - instance: db2inst1
+          dbs:
+            - name: autodb
+              automatic: "yes"
+            - name: otherdb
+
       db2_instances:
         - instance: "DB2INST"
           name: "db2inst1"
@@ -34,11 +48,6 @@
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
-          databases:
-            - database: "databas1"
-              name: "testdb"
-            - database: "databas2"
-              name: "testdb2"
 
         - instance: "DB2INST2"
           name: "db2inst2"
@@ -51,6 +60,3 @@
           options:
             password: "oracle" 
             fenced_password: "oracle"
-          databases:
-            - database: "databas1"
-              name: "test02"
