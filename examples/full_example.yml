@@ -48,7 +48,7 @@
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"
-          options:
+          user_options:
             password: "oracle" 
             fenced_password: "oracle"
           databases:
