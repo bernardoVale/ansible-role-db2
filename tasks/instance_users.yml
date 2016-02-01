@@ -20,7 +20,7 @@
     group: "{{item.group_name}}"
     password: "{{ item.password | default('ldUMKEu7/QCAY')}}"
     home: "{{ item.home_directory }}"
-    uid: "{{ item.uid | default('619') }}"
+    uid: "{{ item.uid | default('625') }}"
   with_items: db2_instances
   when: item.home_directory is defined
 
@@ -30,7 +30,7 @@
     group: "{{item.group_name}}"
     password: "{{ item.password | default('ldUMKEu7/QCAY')}}"
     home: "/home/{{item.name}}"
-    uid: "{{ item.uid | default('619') }}"
+    uid: "{{ item.uid | default('625') }}"
   with_items: db2_instances
   when: item.home_directory is not defined
 
