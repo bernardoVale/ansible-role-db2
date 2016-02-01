@@ -20,7 +20,7 @@
     group: "{{item.group_name}}"
     password: "{{ item.password | default('ldUMKEu7/QCAY')}}"
     home: "{{ item.home_directory }}"
-    uid: "{{ item.uid | default('5401') }}"
+    uid: "{{ item.uid | default('619') }}"
   with_items: db2_instances
   when: item.home_directory is defined
 
@@ -30,7 +30,7 @@
     group: "{{item.group_name}}"
     password: "{{ item.password | default('ldUMKEu7/QCAY')}}"
     home: "/home/{{item.name}}"
-    uid: "{{ item.uid | default('5401') }}"
+    uid: "{{ item.uid | default('619') }}"
   with_items: db2_instances
   when: item.home_directory is not defined
 
@@ -42,7 +42,7 @@
     group: "{{item.fenced_group_name}}"
     password: "{{ item.fenced_password | default('ldUMKEu7/QCAY')}}"
     home: "{{ item.fenced_home_directory}}"
-    uid: "{{ item.fenced_uid | default('5402') }}"
+    uid: "{{ item.fenced_uid | default('618') }}"
   with_items: db2_instances
   register: db2_fenced_user
   when: item.fenced_home_directory is defined
@@ -53,6 +53,6 @@
     group: "{{item.fenced_group_name}}"
     password: "{{ item.fenced_password | default('ldUMKEu7/QCAY')}}"
     home: "/home/{{item.name}}"
-    uid: "{{ item.fenced_uid | default('5402') }}"
+    uid: "{{ item.fenced_uid | default('618') }}"
   with_items: db2_instances
   when: item.fenced_home_directory is not defined
