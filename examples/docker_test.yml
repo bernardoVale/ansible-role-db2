@@ -39,8 +39,8 @@
           uid: 666
           gid: 1234
           fenced_gid: 2233
-          options:
-            autostart: "YES"
+          # options:
+          #   autostart: "YES"
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
