@@ -24,7 +24,6 @@
           fenced_username: "db2fenc1"
           fenced_group_name: "db2fadm1"
           # user,group and password are mandatory but you can also pass gid,uid, home_directory...
-          user_options:
-            password: "oracle" # myinstan password
-            fenced_password: "oracle" #fenced user password
+          password: "oracle" # myinstan password
+          fenced_password: "oracle" #fenced user password
           

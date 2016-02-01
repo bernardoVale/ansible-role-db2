@@ -6,3 +6,5 @@
 
 #My examples
 examples/test_*.yml
+#Ignore local vagrant boxes
+*.box

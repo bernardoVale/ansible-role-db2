@@ -3,11 +3,11 @@ Vagrant.configure(2) do |config|
 
   # RedHat 6.5
   config.vm.define "redhat", primary: true do |redhat|
-    redhat.vm.box = "anandbitra/redhat-6.5"
+    #redhat.vm.box = "anandbitra/redhat-6.5"
+    redhat.vm.box = "bernardo_redhat.box"
     redhat.vm.hostname = "redhat"
-    redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/global_profile.yml"
+      ansible.playbook = "examples/custom_instance.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "parse"
@@ -19,12 +19,14 @@ Vagrant.configure(2) do |config|
   end
   # Oracle Linux 6.5
   config.vm.define "ol" do |ol|
-    ol.vm.box = "terrywang/oraclelinux-6-x86_64"
+    #ol.vm.box = "terrywang/oraclelinux-6-x86_64"
+    ol.vm.box = "ol6_bernardo.box"
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/multiples_instances.yml"
+      ansible.playbook = "examples/full_example.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
+      #ansible.tags = "users"
       #ansible.tags = "download"
     end
     ol.vm.provider "virtualbox" do |v|
