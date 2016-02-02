@@ -10,6 +10,12 @@
           dest: /etc/yum.repos.d/public-yum-release.repo
         tags: download
 
+      - name: Create DB2 Directory
+        file:
+          path: /db2
+          state: directory
+          mode: 755
+
     roles:
       - db2
     vars:
@@ -21,18 +27,13 @@
         location: "/vagrant/db2_10503.tar.gz"
         dest: "/tmp"
 
-      global_params:
-        db2_antijoin: "YES"
-        db2fcmcomm: "TCPIP4"
-
       databases:
         - instance: db2inst2
           dbs:
             - name: testdb
               automatic: "no"
               pagesize: "32768"
-            - name: testing
-              pagesize: "16384"
+
         - instance: db2inst1
           dbs:
             - name: autodb
@@ -45,6 +46,8 @@
           group_name: "db2iadm1"
           fenced_username: "db2fenc1"
           fenced_group_name: "db2fadm1"
+          home_directory: "/db2/db2inst1"
+          fenced_home_directory: "/db2/db2fenc2"
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
@@ -54,9 +57,8 @@
           group_name: "db2iadm2"
           fenced_username: "db2fenc2"
           fenced_group_name: "db2fadm2"
+          home_directory: "/db2/db2inst2"
+          fenced_home_directory: "/db2/db2fenc2"
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"
-          options:
-            password: "oracle" 
-            fenced_password: "oracle"

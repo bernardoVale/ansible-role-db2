@@ -1,11 +1,22 @@
 ---
-# This is used to test the role inside Docker
+# This is to test on Docker
   - hosts: all
     gather_facts: True
+    pre_tasks:
+
+      - name: Create /DB2 directory
+        file: 
+          path: /db2
+          state: directory
+          mode: 755
+        tags: users
+
     roles:
       - db2
     vars:
-      # The binary will be downloaded on Docker build -- see .travis.yml and tests/Dockerfile
+       # Define the db2_binary and setup the URL to download.
+       # Variable location define where should put db2 on ansible machine
+       # Variable dest define where should decompress DB2 on remote host
       db2_binary:
         location: "/tmp/db2.tar.gz"
         dest: "/tmp"
@@ -20,6 +31,16 @@
           group_name: "db2iadm1"
           fenced_username: "db2fenc1"
           fenced_group_name: "db2fadm1"
+          home_directory: "/db2/db2inst1"
+          fenced_home_directory: "/db2/db2fenc1"
+          password: "mypwd"
+          fenced_password: "anotherpwd"
+          fenced_uid: 619
+          uid: 666
+          gid: 1234
+          fenced_gid: 2233
+          # options:
+          #   autostart: "YES"
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
@@ -32,6 +53,3 @@
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"
-          options:
-            password: "oracle" 
-            fenced_password: "oracle"

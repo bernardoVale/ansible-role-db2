@@ -6,3 +6,6 @@
 
 #My examples
 examples/test_*.yml
+
+# My boxes
+*.box

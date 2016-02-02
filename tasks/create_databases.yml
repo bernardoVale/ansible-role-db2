@@ -10,7 +10,7 @@
     become_method: sudo
     with_items: databases
     register: su_value
-
+s
   - debug: var=su_value
 
  # - name: Creating Databases
