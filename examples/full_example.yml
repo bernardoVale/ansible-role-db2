@@ -14,7 +14,7 @@
         file:
           path: /db2
           state: directory
-          mode: 755
+          mode: 0755
 
     roles:
       - db2
@@ -28,17 +28,14 @@
         dest: "/tmp"
 
       databases:
-        - instance: db2inst2
-          dbs:
-            - name: testdb
-              automatic: "no"
-              pagesize: "32768"
-
-        - instance: db2inst1
-          dbs:
-            - name: autodb
-              automatic: "yes"
-            - name: otherdb
+        - name: testdb
+          instance: db2inst1
+          automatic_storage: "no"
+        - name: devdb
+          instance: db2inst1
+        - name: inst2db
+          instance: db2inst2
+          pagesize: "8192"
 
       db2_instances:
         - instance: "DB2INST"
@@ -47,7 +44,10 @@
           fenced_username: "db2fenc1"
           fenced_group_name: "db2fadm1"
           home_directory: "/db2/db2inst1"
-          fenced_home_directory: "/db2/db2fenc2"
+          fenced_home_directory: "/db2/db2fenc1"
+          options:
+            autostart: "YES"
+            start_during_install: "YES"
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
@@ -59,6 +59,9 @@
           fenced_group_name: "db2fadm2"
           home_directory: "/db2/db2inst2"
           fenced_home_directory: "/db2/db2fenc2"
+          options:
+            autostart: "YES"
+            start_during_install: "YES"
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"

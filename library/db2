@@ -1,0 +1,81 @@
+#!/usr/bin/python
+import os
+from os.path import expanduser
+
+class Database:
+
+    def __init__(self, module):
+
+        self.module = module
+
+
+    def is_db_already_created(self):
+
+        cmd = "source %s; db2 list db directory | grep \"Database name\" | awk '{print $4}'" % self.db2profile
+        rc, stdout, stderr = self.module.run_command(cmd, use_unsafe_shell=True)
+
+        if stderr:
+            self.module.fail_json(changed=False, msg=stderr)
+        
+        for db in stdout.strip().split('\n'):
+            if db == self.db_name.upper():
+                return True
+        return False
+
+    def find_db2_profile(self):
+
+        user_home = self.find_db2_home()
+        return os.path.join(user_home, "sqllib/db2profile")
+
+
+    def find_db2_home(self):
+        home = expanduser("~")
+        return home
+
+    def parse_params(self):
+
+        self.db_name = self.module.params['name']
+        self.instance = self.module.params['instance']
+        self.automatic_storage = self.module.params['automatic_storage']
+        self.pagesize = self.module.params['pagesize']
+        self.db2profile = self.find_db2_profile()
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            instance=dict(required=True, type='str'),
+            name=dict(required=True, type='str'),
+            automatic_storage=dict(required=False, default=True, type='bool'),
+            pagesize=dict(required=False, default=None, type='str')
+        ),
+        supports_check_mode=True
+    )
+
+    db = Database(module)
+    db.parse_params()
+
+    if db.is_db_already_created():
+        db.module.exit_json(changed=False, msg="Database %s already created, moving on!" % db.db_name)
+
+    create_cmd = "db2 \"create database %s\" " % db.db_name
+    options = ""
+    # This is default True
+    if not db.automatic_storage:
+        options += "automatic storage no"
+    if db.pagesize:
+        options += " pagesize %s" % db.pagesize
+
+    cmd = "source %s; %s %s" % (db.db2profile, create_cmd, options)
+
+    rc, stdout, stderr = db.module.run_command(cmd, use_unsafe_shell=True)
+
+    if stderr != '' or rc!=0:
+        module.fail_json(changed=False, msg="CMD: %s Failure while creating database %s" % (cmd, db.db_name),
+                         stderr=stderr, rc=rc, stdout = stdout)
+    else:
+        module.exit_json(changed=True, msg="Database %s created" % db.db_name, stdout=stdout, stderr=stderr)
+
+
+from ansible.module_utils.basic import *
+
+main()

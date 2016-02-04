@@ -53,7 +53,7 @@
   - name: Validate results
     debug: var=db2_val
     tags: download
-
+    
   - include: create_databases.yml
     when: databases is defined
     tags: databases

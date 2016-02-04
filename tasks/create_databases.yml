@@ -1,23 +1,17 @@
 ---
-  - name: Parse Create DB sql
-    template: src=databases.j2.cmd dest="/tmp/{{item.instance}}_databases.cmd"
-    with_items: databases
-
-  - name: Create Databases for each instance
-    shell: "source /home/{{item.instance}}/sqllib/db2profile; bash /tmp/{{item.instance}}_databases.cmd"
-    become: yes
+  - name: Create Databases
+    db2:
+      name: "{{item.name}}"
+      instance: "{{item.instance}}"
+      automatic_storage: "{{item.automatic_storage | default('YES')}}"
+      pagesize: "{{item.pagesize | default()}}"
+    register: db_debug
+    become: True
     become_user: "{{item.instance}}"
     become_method: sudo
     with_items: databases
-    register: su_value
-s
-  - debug: var=su_value
 
- # - name: Creating Databases
- #   shell: id
- #   become_user: "{{}}"
- #   become: True
- #   become_method: su
- #   with_items: db2_instances
 
- #   "create database {{db.name}}"
+  - name: Create Database Log
+    debug: var=db_debug
+    when: db_debug|changed
