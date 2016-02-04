@@ -9,6 +9,26 @@ class Database:
         self.module = module
 
 
+    def start_instance(self):
+
+        if not self.instance_up():
+            # The start the instance first
+            cmd = "source %s; db2start" % self.db2profile
+            rc, stdout, stderr = self.module.run_command(cmd, use_unsafe_shell=True)
+            if stderr != '' or rc!=0:
+                self.module.fail_json(changed=False, stderr=stderr, rc=rc, stdout=stdout)
+
+
+    def instance_up(self):
+        cmd = "source %s; ps -ef | grep $DB2INSTANCE | grep db2sysc | grep -v grep | wc -l" % self.db2profile
+        rc, stdout, stderr = self.module.run_command(cmd, use_unsafe_shell=True)
+
+        if stderr:
+            self.module.fail_json(changed=False, msg='Could not validade if instance is up'
+                                  , stderr=stderr, rc=rc, stdout=stdout)
+
+        return '1' == stdout.strip()
+
     def is_db_already_created(self):
 
         cmd = "source %s; db2 list db directory | grep \"Database name\" | awk '{print $4}'" % self.db2profile
@@ -38,6 +58,8 @@ class Database:
         self.instance = self.module.params['instance']
         self.automatic_storage = self.module.params['automatic_storage']
         self.pagesize = self.module.params['pagesize']
+        self.codeset = self.module.params['codeset']
+        self.territory = self.module.params['territory']
         self.db2profile = self.find_db2_profile()
 
 def main():
@@ -46,7 +68,9 @@ def main():
             instance=dict(required=True, type='str'),
             name=dict(required=True, type='str'),
             automatic_storage=dict(required=False, default=True, type='bool'),
-            pagesize=dict(required=False, default=None, type='str')
+            pagesize=dict(required=False, default=None, type='str'),
+            codeset=dict(required=False, default=None, type='str'),
+            territory=dict(required=False, default=None, type='str'),
         ),
         supports_check_mode=True
     )
@@ -54,18 +78,25 @@ def main():
     db = Database(module)
     db.parse_params()
 
+    # Only if the instance is down
+    db.start_instance()
+
     if db.is_db_already_created():
         db.module.exit_json(changed=False, msg="Database %s already created, moving on!" % db.db_name)
 
-    create_cmd = "db2 \"create database %s\" " % db.db_name
+    create_cmd = "db2 \"create database %s " % db.db_name
     options = ""
     # This is default True
     if not db.automatic_storage:
-        options += "automatic storage no"
+        options += " automatic storage no"
+    if db.codeset:
+        options += " using codeset %s" % db.codeset
+    if db.territory:
+        options += " territory %s" % db.territory
     if db.pagesize:
         options += " pagesize %s" % db.pagesize
 
-    cmd = "source %s; %s %s" % (db.db2profile, create_cmd, options)
+    cmd = "source %s; %s %s \"" % (db.db2profile, create_cmd, options)
 
     rc, stdout, stderr = db.module.run_command(cmd, use_unsafe_shell=True)
 

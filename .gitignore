@@ -9,3 +9,6 @@ examples/test_*.yml
 
 # My boxes
 *.box
+
+#PyCharm Files
+*.idea/

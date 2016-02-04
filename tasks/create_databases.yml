@@ -5,6 +5,8 @@
       instance: "{{item.instance}}"
       automatic_storage: "{{item.automatic_storage | default('YES')}}"
       pagesize: "{{item.pagesize | default()}}"
+      codeset: "{{item.codeset | default()}}"
+      territory: "{{item.territory | default()}}"
     register: db_debug
     become: True
     become_user: "{{item.instance}}"

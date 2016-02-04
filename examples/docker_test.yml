@@ -22,14 +22,16 @@
         dest: "/tmp"
 
       databases:
-        - name: testdb
+        - name: jts
           instance: db2inst1
-          automatic_storage: "no"
-        - name: devdb
-          instance: db2inst1
-        - name: inst2db
+          codeset: "UTF-8"
+          territory: "en"
+          pagesize: "16384"
+        - name: ccm
           instance: db2inst2
-          pagesize: "8192"
+          codeset: "UTF-8"
+          territory: "en"
+          pagesize: "16384"
 
       db2_instances:
         - instance: "DB2INST"
