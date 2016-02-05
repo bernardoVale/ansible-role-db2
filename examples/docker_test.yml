@@ -55,9 +55,6 @@
           fenced_group_name: "db2fadm2"
           home_directory: "/db2/db2inst2"
           fenced_home_directory: "/db2/db2fenc2"
-          options:
-            autostart: "YES"
-            start_during_install: "YES"
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"

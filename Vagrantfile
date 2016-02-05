@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     redhat.vm.hostname = "redhat"
     redhat.vm.network "private_network", ip: "10.0.2.15"
     redhat.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/full_example.yml"
+      ansible.playbook = "examples/docker_test.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "databases"
@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
     ol.vm.box = "terrywang/oraclelinux-6-x86_64"
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
-      ansible.playbook = "examples/multiples_instances.yml"
+      ansible.playbook = "examples/docker_test.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "download"

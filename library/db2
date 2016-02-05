@@ -16,7 +16,8 @@ class Database:
             cmd = "source %s; db2start" % self.db2profile
             rc, stdout, stderr = self.module.run_command(cmd, use_unsafe_shell=True)
             if stderr != '' or rc!=0:
-                self.module.fail_json(changed=False, stderr=stderr, rc=rc, stdout=stdout)
+                self.module.fail_json(changed=False, msg="Error, could not startup the database",
+                                      stderr=stderr, rc=rc, stdout=stdout)
 
 
     def instance_up(self):
