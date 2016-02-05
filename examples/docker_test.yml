@@ -8,7 +8,7 @@
         file: 
           path: /db2
           state: directory
-          mode: 755
+          mode: 0755
         tags: users
 
     roles:
