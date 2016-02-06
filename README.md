@@ -126,21 +126,19 @@ Global parameters are provided by defining `global_params` hash.
 
 ###Creating databases
 
-By default this role won't create databases, if you want to, define the hash list `databases` to the instance.
+By default this role won't create databases, if you want to, define the hash list `databases`
 
 The full example is found [here](examples/databases.yml)
 
-    db2_instances:
-      - instance: "DB2INST"
-        name: "db2inst1" 
-        group_name: "db2iadm1"
-        fenced_username: "db2fenc1"
-        fenced_group_name: "db2fadm1"
-        databases:
-          - database: "databas1"
-            name: "testdb"
-          - database: "databas2"
-            name: "testdb2"
+    databases:
+        - name: mydb
+          instance: db2inst1
+        - name: otherdb
+          instance: db2inst2
+          codeset: "UTF-8"
+          territory: "en"
+          pagesize: "16384"
+        
 
 Disclaimer
 ---------

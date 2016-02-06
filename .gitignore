@@ -6,5 +6,9 @@
 
 #My examples
 examples/test_*.yml
-#Ignore local vagrant boxes
+
+# My boxes
 *.box
+
+#PyCharm Files
+*.idea/

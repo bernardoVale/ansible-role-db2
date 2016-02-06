@@ -8,7 +8,7 @@
         file: 
           path: /db2
           state: directory
-          mode: 755
+          mode: 0755
         tags: users
 
     roles:
@@ -21,10 +21,18 @@
         location: "/tmp/db2.tar.gz"
         dest: "/tmp"
 
-      global_params:
-        db2_antijoin: "YES"
-        db2fcmcomm: "TCPIP4"
-      
+      databases:
+        - name: jts
+          instance: db2inst1
+          codeset: "UTF-8"
+          territory: "en"
+          pagesize: "16384"
+        - name: ccm
+          instance: db2inst2
+          codeset: "UTF-8"
+          territory: "en"
+          pagesize: "16384"
+
       db2_instances:
         - instance: "DB2INST"
           name: "db2inst1"
@@ -33,14 +41,9 @@
           fenced_group_name: "db2fadm1"
           home_directory: "/db2/db2inst1"
           fenced_home_directory: "/db2/db2fenc1"
-          password: "mypwd"
-          fenced_password: "anotherpwd"
-          fenced_uid: 619
-          uid: 666
-          gid: 1234
-          fenced_gid: 2233
-          # options:
-          #   autostart: "YES"
+          options:
+            autostart: "YES"
+            start_during_install: "YES"
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
@@ -50,6 +53,8 @@
           group_name: "db2iadm2"
           fenced_username: "db2fenc2"
           fenced_group_name: "db2fadm2"
+          home_directory: "/db2/db2inst2"
+          fenced_home_directory: "/db2/db2fenc2"
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"

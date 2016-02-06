@@ -1,0 +1,21 @@
+---
+  - name: Create Databases
+    db2:
+      name: "{{item.name}}"
+      instance: "{{item.instance}}"
+      automatic_storage: "{{item.automatic_storage | default('YES')}}"
+      pagesize: "{{item.pagesize | default()}}"
+      codeset: "{{item.codeset | default()}}"
+      territory: "{{item.territory | default()}}"
+    register: db_debug
+    become: True
+    become_user: "{{item.instance}}"
+    become_method: sudo
+    vars: #Pipelining it's great but doesn't work with sudo
+      ansible_pipelining: False
+    with_items: databases
+
+
+  - name: Create Database Log
+    debug: var=db_debug
+    when: db_debug|changed

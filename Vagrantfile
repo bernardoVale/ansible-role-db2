@@ -7,10 +7,14 @@ Vagrant.configure(2) do |config|
     redhat.vm.box = "bernardo_redhat.box"
     redhat.vm.hostname = "redhat"
     redhat.vm.provision "ansible" do |ansible|
+<<<<<<< HEAD
       ansible.playbook = "examples/custom_instance.yml"
+=======
+      ansible.playbook = "examples/docker_test.yml"
+>>>>>>> database-support
       ansible.sudo = true
       ansible.sudo_user = "root"
-      #ansible.tags = "parse"
+      #ansible.tags = "databases"
     end
     redhat.vm.provider "virtualbox" do |v|
         v.customize [ "modifyvm", :id, "--cpus", "1" ]
@@ -23,7 +27,11 @@ Vagrant.configure(2) do |config|
     ol.vm.box = "ol6_bernardo.box"
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
+<<<<<<< HEAD
       ansible.playbook = "examples/full_example.yml"
+=======
+      ansible.playbook = "examples/docker_test.yml"
+>>>>>>> database-support
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "users"
@@ -43,7 +51,7 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "examples/full_example.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      #ansible.tags = "setup"
+      ansible.tags = "databases"
       ansible.extra_vars = {
         yum_repo: "http://public-yum.oracle.com/public-yum-ol7.repo"
       }

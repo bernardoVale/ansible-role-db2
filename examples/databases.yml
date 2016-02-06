@@ -12,14 +12,18 @@
     roles:
       - db2
     vars:
-      db2_instances:
-        - instance: "DB2INST"
-          name: "db2inst1" 
-          group_name: "db2iadm1"
-          fenced_username: "db2fenc1"
-          fenced_group_name: "db2fadm1"
-          databases:
-            - database: "databas1"
-              name: "testdb"
-            - database: "databas2"
-              name: "testdb2"
+      # Use databases hash to add databases to an instance
+      databases:
+         # The minimum information required it the database name and the instance name
+         - name: autodb
+           instance: db2inst1
+         - name: otherdb
+           instance: db2inst1
+           automatic: "no"
+         # All possible customizations
+#         - name: customdb
+#           instance: db2inst2
+#           automatic: "yes" # BOOLEAN # .-AUTOMATIC STORAGE--YES-. '-AUTOMATIC STORAGE--NO--'
+#           codeset: "UTF-8" # '-USING CODESET--codeset--TERRITORY--territory-'
+#           territory: "en"
+#           pagesize: "4096" # PAGESIZE INTEGER
