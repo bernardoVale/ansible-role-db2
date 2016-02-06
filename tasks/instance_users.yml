@@ -10,7 +10,7 @@
   group: name="{{item.group_name}}" state=present 
   with_items: db2_instances
 
-#This isn't working.
+#This isn't working. See issue #15
   #gid= "{{ item.gid | default('543') }}"
   #gid= "{{ item.fenced_gid | default('544') }}"
 

@@ -11,6 +11,8 @@
     become: True
     become_user: "{{item.instance}}"
     become_method: sudo
+    vars: #Pipelining it's great but doesn't work with sudo
+      ansible_pipelining: False
     with_items: databases
 
 

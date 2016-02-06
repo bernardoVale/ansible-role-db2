@@ -73,7 +73,8 @@ def main():
             codeset=dict(required=False, default=None, type='str'),
             territory=dict(required=False, default=None, type='str'),
         ),
-        supports_check_mode=True
+        supports_check_mode=False,
+        required_together=[['codeset', 'territory']]
     )
 
     db = Database(module)
