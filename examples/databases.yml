@@ -20,6 +20,8 @@
          - name: otherdb
            instance: db2inst1
            automatic: "no"
+
+         # codeset and territory must be used together
          # All possible customizations
 #         - name: customdb
 #           instance: db2inst2

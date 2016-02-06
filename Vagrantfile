@@ -7,11 +7,7 @@ Vagrant.configure(2) do |config|
     redhat.vm.box = "bernardo_redhat.box"
     redhat.vm.hostname = "redhat"
     redhat.vm.provision "ansible" do |ansible|
-<<<<<<< HEAD
-      ansible.playbook = "examples/custom_instance.yml"
-=======
-      ansible.playbook = "examples/docker_test.yml"
->>>>>>> database-support
+      ansible.playbook = "examples/test_redhat.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "databases"
@@ -27,11 +23,7 @@ Vagrant.configure(2) do |config|
     ol.vm.box = "ol6_bernardo.box"
     ol.vm.hostname = "oraclelinux-db2"
     ol.vm.provision "ansible" do |ansible|
-<<<<<<< HEAD
-      ansible.playbook = "examples/full_example.yml"
-=======
-      ansible.playbook = "examples/docker_test.yml"
->>>>>>> database-support
+      ansible.playbook = "examples/multiples_instances.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
       #ansible.tags = "users"

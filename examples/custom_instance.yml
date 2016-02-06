@@ -20,11 +20,17 @@
           group_name: "myinadm"
           fenced_username: "myfenc1"
           fenced_group_name: "myfadm1"
-          # Read Instance specifications on the website above to get a list of all optionals parameters related to a DB2 instance:
+          #Password:
+          #Optionally set the user's password to this crypted value. See the user example in the
+          #github examples directory for what this looks like in a playbook.
+          #See http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+          #for details on various ways to generate these password values. Note on Darwin system,
+          #this value has to be cleartext. Beware of security issues.
+          password: "oracle"
+          fenced_password: "anotherpass"
+          # Read (Instance specifications) on the website above to get a list of all optionals parameters related to a DB2 instance:
           # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
-          password: "oracle" # myinstan password
-          uid: 999
-          gid: 987
+          # You can't set uid or gid. It's currently not possible
           options:
             autostart: "YES" # YES or NO
             start_during_install: "YES" # YES or NO

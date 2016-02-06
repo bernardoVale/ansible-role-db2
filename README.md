@@ -9,7 +9,11 @@ Requirements
 ------------
 You need a copy of DB2 compressed. The role can download from a remote URL or use a local copy of DB2 present on your ansible host.
 
-There are some options that can only be acomplish installing DB2 as **root**. All then are documented on [examples](examples/)
+**ROOT ACCESS**
+
+This role can only be used with root access. DB2 can be installed without root but many features like creating instances
+are only available as **root**. Make sure you're installing with root user or using privillege escalation with **sudo**.
+
 
 Role Variables
 --------------
@@ -31,9 +35,9 @@ This hash controls how to send the DB2 binary to the remote hosts.
         dest: /tmp
         
         
- Check how to download DB2 from a remote URL [here](examples/downloading_db2.yml)
+ Check how to download DB2 from a remote URL [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/downloading_db2.yml)
  
- If you have a local copy use this [example](examples/local_db2.yml)
+ If you have a local copy use this [example](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/local_db2.yml)
 
 ###DB2_PACKAGES
 
@@ -67,10 +71,10 @@ None
 
 Example Playbook
 ----------------
-All custom options are provided through an example file on [examples folder](examples/)
+All custom options are provided through an example file on [examples folder](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/)
 
 
-You need at least tell us where to get DB2. [Downloading db2](examples/downloading_db2.yml)
+You need at least specify where to get DB2. [Downloading db2](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/downloading_db2.yml)
 
     - hosts: servers
       roles:
@@ -84,7 +88,7 @@ You need at least tell us where to get DB2. [Downloading db2](examples/downloadi
 
 The instance will be created using all DB2 defaults, but you can customize it using the hash **db2_instances**
 
-The full example [here](examples/custom_instance.yml)
+The full example [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/custom_instance.yml)
 
     db2_instances:
          - instance: "DB2INST"
@@ -93,7 +97,7 @@ The full example [here](examples/custom_instance.yml)
            fenced_username: "myfenc1"
            fenced_group_name: "myfadm1"
            
-**db2_instances** is a list of instances, yo can create more than one, an example of two instances is found [here](examples/multiples_instances.yml)
+**db2_instances** is a list of instances, yo can create more than one, an example of two instances is found [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/multiples_instances.yml)
 
 ###Customizing Parameters
 
@@ -111,7 +115,7 @@ Define hash `dbm_params` and set any `key: value` DB2 parameter. The key must be
             intra_parallel: "YES"
             numdb: "20"
             
-The full example [here](examples/instance_with_custom_params.yml)
+The full example [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/instance_with_custom_params.yml)
 
 ### Global parameters
 
@@ -121,14 +125,14 @@ Global parameters are provided by defining `global_params` hash.
         db2_antijoin: "YES"
         db2fcmcomm: "TCPIP4"
  
- The full example [here](examples/global_profile.yml)
+ The full example [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/global_profile.yml)
         
 
 ###Creating databases
 
 By default this role won't create databases, if you want to, define the hash list `databases`
 
-The full example is found [here](examples/databases.yml)
+The full example is found [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/databases.yml)
 
     databases:
         - name: mydb
@@ -138,7 +142,7 @@ The full example is found [here](examples/databases.yml)
           codeset: "UTF-8"
           territory: "en"
           pagesize: "16384"
-        
+ 
 
 Disclaimer
 ---------
@@ -146,7 +150,7 @@ There still some work to be done. There's no warranty that the role will work fo
 
 Developing
 --------
-If you're insterested in helping I will be glad. Please full a issue or just send me a pull request.
+If you're interested in helping please full a issue or just send me a pull request.
 
 License
 -------

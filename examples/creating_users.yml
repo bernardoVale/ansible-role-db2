@@ -9,6 +9,14 @@
           url: "{{yum_repo}}"
           dest: /etc/yum.repos.d/public-yum-release.repo
         tags: download
+
+      - name: Create /DB2 directory
+        file: 
+          path: /db2
+          state: directory
+          mode: 0755
+        tags: users
+        
     roles:
       - { role: Stouts.limits, tags: [ 'limits' ] }
       - db2
@@ -26,4 +34,6 @@
           # user,group and password are mandatory but you can also pass gid,uid, home_directory...
           password: "oracle" # myinstan password
           fenced_password: "oracle" #fenced user password
+          home_directory: "/db2/db2inst1"
+          fenced_home_directory: "/db2/db2fenc1"
           
