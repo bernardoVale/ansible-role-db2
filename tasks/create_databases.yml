@@ -3,7 +3,8 @@
     db2:
       name: "{{item.name}}"
       instance: "{{item.instance}}"
-      automatic_storage: "{{item.automatic_storage | default('YES')}}"
+      path: "{{item.path | default()}}"
+      automatic: "{{item.automatic | default('YES')}}"
       pagesize: "{{item.pagesize | default()}}"
       codeset: "{{item.codeset | default()}}"
       territory: "{{item.territory | default()}}"

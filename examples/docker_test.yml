@@ -30,6 +30,7 @@
         - name: ccm
           instance: db2inst2
           codeset: "UTF-8"
+          path: /db2
           territory: "en"
           pagesize: "16384"
 
@@ -39,8 +40,6 @@
           group_name: "db2iadm1"
           fenced_username: "db2fenc1"
           fenced_group_name: "db2fadm1"
-          home_directory: "/db2/db2inst1"
-          fenced_home_directory: "/db2/db2fenc1"
           options:
             autostart: "YES"
             start_during_install: "YES"

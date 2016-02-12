@@ -26,6 +26,7 @@
 #         - name: customdb
 #           instance: db2inst2
 #           automatic: "yes" # BOOLEAN # .-AUTOMATIC STORAGE--YES-. '-AUTOMATIC STORAGE--NO--'
+#           path: /db2 # Directory of db. Can be a comma separeted list of directories if using automatic storage.
 #           codeset: "UTF-8" # '-USING CODESET--codeset--TERRITORY--territory-'
 #           territory: "en"
 #           pagesize: "4096" # PAGESIZE INTEGER
