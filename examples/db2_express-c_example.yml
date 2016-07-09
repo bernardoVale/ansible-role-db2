@@ -1,0 +1,36 @@
+---
+# In this example we're using the url variable to download DB2 binaries
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+
+      - name: Criando o diretorio do DB2
+        file:
+          path: /db2
+          state: directory
+          mode: 0775
+
+    roles:
+      - { role: Stouts.limits, tags: [ 'limits' ] }
+      - db2
+    vars:
+
+      #DB2 Express example
+      resp:
+        prod: "EXPRESS_C"
+        file: "/opt/ibm/db2/V10.1"
+        lic_agreement: "ACCEPT"
+        install_type: "TYPICAL"
+
+      # DB2 Express tar.gz usually creates a folder `expc`
+      db2_creates: expc
+
+      db2_binary:
+         location: "/vagrant/db2_v101_linuxx64_expc.tar.gz"
+         dest: "/tmp"

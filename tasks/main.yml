@@ -22,7 +22,7 @@
     tags: ['dont-on-docker', 'setup']
 
   - name: Running DB2 Pre Requisits Check
-    command: "{{db2_binary.dest}}/server/db2prereqcheck -i -s"
+    command: "{{db2_binary.dest}}/{{db2_creates}}/db2prereqcheck -i -s"
     register: precheck
     failed_when: "'failed' in precheck.stderr"
     changed_when: False 
@@ -33,7 +33,7 @@
     tags: parse
 
   - name: Installing DB2 10.5
-    command: "{{db2_binary.dest}}/server/db2setup -r /tmp/db2server.rsp"
+    command: "{{db2_binary.dest}}/{{db2_creates}}/db2setup -r /tmp/db2server.rsp"
     register: db2_setup
     args: 
       creates: "{{resp.file}}"

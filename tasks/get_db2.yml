@@ -11,4 +11,4 @@
     src: "{{db2_binary.location}}"
     dest: "{{db2_binary.dest}}"
     copy: no
-    creates: "{{db2_binary.dest}}/server"
+    creates: "{{db2_binary.dest}}/{{db2_creates}}"

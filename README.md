@@ -33,11 +33,16 @@ This hash controls how to send the DB2 binary to the remote hosts.
         url: https://mycompany.com/downloads/db2_10_5.tar.gz
         location: /ansible/files/db2_10.5.tar.gz
         dest: /tmp
-        
-        
+
  Check how to download DB2 from a remote URL [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/downloading_db2.yml)
  
  If you have a local copy use this [example](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/local_db2.yml)
+
+###DB2_CREATES
+
+The DB2 tar.gz usually creates a folder named `server`, but there are some binaries that creates different folders, for example DB2 Express C create a folder named `expc`. If your tar.gz creates a different folder, change this variable. For example:
+
+    db2_creates: expc
 
 ###DB2_PACKAGES
 
@@ -62,6 +67,15 @@ This hash is used to customize the DB2 installation.
        file: "/opt/ibm/db2/V10.5"
        lic_agreement: "ACCEPT" # ACCEPT or DECLINE
        install_type: "TYPICAL" # TYPICAL, COMPACT, CUSTOM
+
+For **DB2 Express-C** (Check this [file](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/db2_express-c_example.yml) ):
+
+     resp:
+       prod: "EXPRESS_C"
+       file: "/opt/ibm/db2/V10.1"
+       lic_agreement: "ACCEPT" # ACCEPT or DECLINE
+       install_type: "TYPICAL" # TYPICAL, COMPACT, CUSTOM
+
       
 **NOTE**: By using this role, you're accepting [IBM license](http://www-03.ibm.com/software/sla/sladb.nsf/search/).
 

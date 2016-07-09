@@ -1,4 +1,6 @@
 ---
+# On most DB2 compressed binary the tar.gz creates a file named server, but if your compressed file doesn't, change this variable to the name of the folder that it creates.
+db2_creates: server
 db2_packages:
  - pam
  - pam-devel.i686
