@@ -9,15 +9,7 @@
           url: "{{yum_repo}}"
           dest: /etc/yum.repos.d/public-yum-release.repo
         tags: download
-
-      - name: Criando o diretorio do DB2
-        file:
-          path: /db2
-          state: directory
-          mode: 0775
-
     roles:
-      - { role: Stouts.limits, tags: [ 'limits' ] }
       - db2
     vars:
 
