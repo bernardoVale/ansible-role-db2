@@ -1,0 +1,5 @@
+---
+  - name: Installing DB2 pre requisites packages - RedHat
+    yum: name="{{ item }}" state=installed update_cache={{make_cache}} disable_gpg_check=yes
+    tags: ['packages', 'setup']
+    with_items: db2_packages

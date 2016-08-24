@@ -1,11 +1,16 @@
 ---
+  # Include variables at the start so they're in scope
+  - name: Include OS-Specific variables
+    include_vars: "{{ ansible_os_family }}.yml"
+
   - include: get_db2.yml
     tags: download
 
-  - name: Installing DB2 pre requisites packages
-    yum: name="{{ item }}" state=installed update_cache={{make_cache}} disable_gpg_check=yes
-    tags: ['packages', 'setup']
-    with_items: db2_packages
+  - include: packages-redhat.yml
+    when: "'{{ansible_os_family}}' == 'RedHat'"
+
+  - include: packages-debian.yml
+    when: "'{{ansible_os_family}}' == 'Debian'"
 
   - include: instance_users.yml
     tags: ['users', 'setup']
@@ -13,6 +18,7 @@
   - name: Disabling SELinux
     selinux: state=disabled
     tags: ['dont-on-docker', 'setup']
+    when: "'{{ansible_os_family}}' == 'RedHat'"
 
   - name: Adding entry to /etc/hosts
     lineinfile:

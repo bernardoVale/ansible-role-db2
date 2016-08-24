@@ -1,0 +1,13 @@
+---
+  - name: Adding i386 packages on Apt
+    shell: dpkg --add-architecture i386
+    tags: setup
+    
+  - name: Installing DB2 pre requisites packages - Debian
+    apt: name="{{ item }}" state=installed update_cache={{make_cache}}
+    tags: ['packages', 'setup']
+    with_items: db2_packages
+
+  - name: Fixing Libpam
+    file: path=/lib/libpam.so src=/lib/i386-linux-gnu/libpam.so.0 state=link
+    tags: setup

@@ -1,0 +1,11 @@
+---
+db2_packages:
+ - libstdc++6
+ - libaio1
+ - unzip
+ - libx32stdc++6
+ - libpam0g
+ - lib32stdc++6
+ - libpam0g:i386
+
+make_cache: yes

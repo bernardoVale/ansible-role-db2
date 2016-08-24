@@ -59,7 +59,6 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "examples/test_ubuntu.yml"
       ansible.sudo = true
       ansible.sudo_user = "root"
-      ansible.tags = "parse"
     end
   end
 
