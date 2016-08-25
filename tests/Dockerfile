@@ -1,4 +1,4 @@
-FROM bernardovale/ol7db2base
+FROM bernardovale/ol7db2base:1.1
 
 # Install Ansible and dependences
 RUN curl https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -o epel-release-latest-7.noarch.rpm

@@ -5,7 +5,7 @@ services:
   - docker
 before_install:
   # Pull container
-  - 'sudo docker pull oraclelinux:7.2'
+  - 'sudo docker pull bernardovale/ol7db2base:1.1'
   # Customize container
   - 'sudo docker build --rm=true --file=tests/Dockerfile --tag=ol7-db2:latest tests'
 
