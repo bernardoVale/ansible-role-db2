@@ -5,10 +5,10 @@
   
 - name: Creating DB2 Fenced Groups
   group: name="{{item.fenced_group_name}}" state=present 
-  with_items: db2_instances
+  with_items: "{{ db2_instances }}"
 - name: Creating DB2 Instance Groups
   group: name="{{item.group_name}}" state=present 
-  with_items: db2_instances
+  with_items: "{{ db2_instances }}"
 
 #This isn't working. See issue #15
   #gid= "{{ item.gid | default('543') }}"
@@ -20,7 +20,7 @@
     group: "{{item.group_name}}"
     password: "{{ item.password | default('ldUMKEu7/QCAY')}}"
     home: "{{ item.home_directory }}"
-  with_items: db2_instances
+  with_items: "{{ db2_instances }}"
   when: item.home_directory is defined
 
 - name: Creating DB2 Instance Users - default
@@ -29,7 +29,7 @@
     group: "{{item.group_name}}"
     password: "{{ item.password | default('ldUMKEu7/QCAY')}}"
     home: "/home/{{item.name}}"
-  with_items: db2_instances
+  with_items: "{{ db2_instances }}"
   when: item.home_directory is not defined
 
 #TODO: Find a better way to cope with home_directory default value
@@ -40,7 +40,7 @@
     group: "{{item.fenced_group_name}}"
     password: "{{ item.fenced_password | default('ldUMKEu7/QCAY')}}"
     home: "{{ item.fenced_home_directory}}"
-  with_items: db2_instances
+  with_items: "{{ db2_instances }}"
   register: db2_fenced_user
   when: item.fenced_home_directory is defined
 
@@ -50,5 +50,5 @@
     group: "{{item.fenced_group_name}}"
     password: "{{ item.fenced_password | default('ldUMKEu7/QCAY')}}"
     home: "/home/{{item.fenced_username}}"
-  with_items: db2_instances
+  with_items: "{{ db2_instances }}"
   when: item.fenced_home_directory is not defined
