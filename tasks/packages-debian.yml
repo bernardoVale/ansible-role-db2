@@ -6,7 +6,7 @@
   - name: Installing DB2 pre requisites packages - Debian
     apt: name="{{ item }}" state=installed update_cache={{make_cache}}
     tags: ['packages', 'setup']
-    with_items: db2_packages
+    with_items: "{{ db2_packages }}"
 
   - name: Fixing Libpam
     file: path=/lib/libpam.so src=/lib/i386-linux-gnu/libpam.so.0 state=link
