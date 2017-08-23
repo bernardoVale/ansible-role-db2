@@ -9,3 +9,4 @@ db2_packages:
  - libstdc++
  - ksh
  - unzip
+ - numactl
