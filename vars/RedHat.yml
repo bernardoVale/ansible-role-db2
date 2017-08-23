@@ -3,8 +3,6 @@ db2_packages:
  - pam
  - pam-devel.i686
  - libaio
- - compat-libstdc++-33.i686
- - compat-libstdc++-33
  - libstdc++-devel.i686
  - libstdc++
  - ksh
