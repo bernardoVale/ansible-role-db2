@@ -10,3 +10,4 @@ db2_packages:
  - ksh
  - unzip
  - numactl
+ - libselinux-python
