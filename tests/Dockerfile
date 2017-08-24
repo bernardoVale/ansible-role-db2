@@ -4,7 +4,7 @@ FROM bernardovale/ol7db2base:1.1
 RUN curl https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -o epel-release-latest-7.noarch.rpm
 
 RUN yum install -y epel-release-latest-7.noarch.rpm; \
-yum install -y glibc.i6862 nspr; \
+yum install -y glibc.i686 nspr; \
 rm -rf epel-release-latest-7.noarch.rpm
 
 RUN yum install -y unzip tar gcc python-devel python-pip openssl-devel file python-setuptools libffi-devel libselinux-python python2-crypto git sudo
