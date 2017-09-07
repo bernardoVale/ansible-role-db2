@@ -57,3 +57,13 @@
           dbm_params:
             intra_parallel: "NO"
             numdb: "25"
+
+        - instance: "DB2INST3"
+          name: "db2inst3"
+          group_name: "db2iadm3"
+          fenced_username: "db2fenc3"
+          fenced_group_name: "db2fadm3"
+          uid: 901
+          gid: 902
+          fenced_uid: 801
+          fenced_gid: 802
