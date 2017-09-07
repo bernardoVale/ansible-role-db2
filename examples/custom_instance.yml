@@ -30,7 +30,10 @@
           fenced_password: "anotherpass"
           # Read (Instance specifications) on the website above to get a list of all optionals parameters related to a DB2 instance:
           # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
-          # You can't set uid or gid. It's currently not possible
+          uid: 999
+          gid: 987
+          fenced_uid: 888
+          fenced_gid: 876
           options:
             autostart: "YES" # YES or NO
             start_during_install: "YES" # YES or NO

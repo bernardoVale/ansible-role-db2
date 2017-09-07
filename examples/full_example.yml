@@ -47,6 +47,10 @@
           fenced_group_name: "db2fadm1"
           home_directory: "/db2/db2inst1"
           fenced_home_directory: "/db2/db2fenc1"
+          uid: 999
+          gid: 987
+          fenced_uid: 888
+          fenced_gid: 876
           dbm_params:
             intra_parallel: "YES"
             numdb: "15"
@@ -58,6 +62,10 @@
           fenced_group_name: "db2fadm2"
           home_directory: "/db2/db2inst2"
           fenced_home_directory: "/db2/db2fenc2"
+          uid: 900
+          gid: 901
+          fenced_uid: 800
+          fenced_gid: 801
           options:
             autostart: "YES"
             start_during_install: "YES"
