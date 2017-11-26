@@ -98,6 +98,16 @@ You need at least specify where to get DB2. [Downloading db2](https://github.com
           location: /ansible/files/db2_10.5.tar.gz
            dest: /tmp
 
+###Installing DB2 without instances
+
+In some cases, such as cluster failover deployment, you may wish to install only DB2 software and not create any instances.
+This can be achieved by specifying the `create_instances: false` variable like shown below.
+
+    vars:
+      create_instances: false
+
+The full example [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/db2_without_instances.yml)
+
 ###Creating a custom instance
 
 The instance will be created using all DB2 defaults, but you can customize it using the hash **db2_instances**
@@ -111,7 +121,7 @@ The full example [here](https://github.com/bernardoVale/ansible-role-db2/tree/ma
            fenced_username: "myfenc1"
            fenced_group_name: "myfadm1"
            
-**db2_instances** is a list of instances, yo can create more than one, an example of two instances is found [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/multiples_instances.yml)
+**db2_instances** is a list of instances, you can create more than one, an example of two instances is found [here](https://github.com/bernardoVale/ansible-role-db2/tree/master/examples/multiples_instances.yml)
 
 ###Customizing Parameters
 

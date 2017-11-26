@@ -37,3 +37,7 @@ db2_instances:
     group_name: "db2iadm1"
     fenced_username: "db2fenc1"
     fenced_group_name: "db2fadm1"
+
+# Create the instances listed in 'db2_instances' variable.
+# This can be set to false for installation without any instance.
+create_instances: true

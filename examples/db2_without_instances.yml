@@ -1,0 +1,42 @@
+---
+#In this example we are installing DB2 without instances, so just installing the DB2 software.
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+      # This is required to test on RedHat (No license on vagrant)
+      - name: Installing OL Public repository
+        get_url: 
+          url: "{{yum_repo}}"
+          dest: /etc/yum.repos.d/public-yum-release.repo
+        tags: download
+    roles:
+      - db2
+    vars:
+      # this variable tells to NOT create any DB2 instances 
+      create_instances: false
+      # If the db2_instances are specified together with 'create_instances: false',
+      # then still the specified users and groups are created by this role.
+      # The DB2 instances will NOT be created.
+      # This can be useful for cluster deployment to ensure that uids/gids match across cluster.
+      db2_instances:
+        - instance: "DB2INST"
+          name: "myinstan" 
+          group_name: "myinadm"
+          fenced_username: "myfenc1"
+          fenced_group_name: "myfadm1"
+          #Password:
+          #Optionally set the user's password to this crypted value. See the user example in the
+          #github examples directory for what this looks like in a playbook.
+          #See http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+          #for details on various ways to generate these password values. Note on Darwin system,
+          #this value has to be cleartext. Beware of security issues.
+          password: "oracle"
+          fenced_password: "anotherpass"
+          # Read (Instance specifications) on the website above to get a list of all optionals parameters related to a DB2 instance:
+          # https://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.qb.server.doc/doc/r0007505.html
+          uid: 999
+          gid: 987
+          fenced_uid: 888
+          fenced_gid: 876
+          # do not create home directories for normal and fence user
+          createhome: false

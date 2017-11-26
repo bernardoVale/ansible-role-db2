@@ -25,6 +25,7 @@ INSTALL_TYPE              = {{resp.install_type}}
 
 {%for inst in db2_instances %}
 
+{%if create_instances == true %}
 ** Instance Creation Settings
 ** --------------------------
 INSTANCE                  = {{inst.instance}}
@@ -47,6 +48,7 @@ INSTANCE                  = {{inst.instance}}
 {% for key, value in inst.dbm_params.iteritems() %}
 {{inst.instance | upper}}.{{ key | upper}}             = {{ value }}
 {% endfor %}
+{% endif %}
 {% endif %}
 {% endfor %}
 

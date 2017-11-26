@@ -1,0 +1,39 @@
+---
+# This is to test on Docker
+  - hosts: all
+    gather_facts: True
+    pre_tasks:
+
+      - name: Create /DB2 directory
+        file:
+          path: /db2
+          state: directory
+          mode: 0755
+        tags: users
+
+    roles:
+      - db2
+    vars:
+       # don't create DB2 instances
+       # but still create instance users and groups without home directories
+      create_instances: false
+       # Define the db2_binary and setup the URL to download.
+       # Variable location define where should put db2 on ansible machine
+       # Variable dest define where should decompress DB2 on remote host
+      db2_binary:
+        location: "/tmp/db2.tar.gz"
+        dest: "/tmp"
+
+      db2_instances:
+        - instance: "DB2INST"
+          name: "db2inst"
+          group_name: "db2iadm"
+          fenced_username: "db2fenc"
+          fenced_group_name: "db2fadm"
+          home_directory: "/db2/db2inst"
+          fenced_home_directory: "/db2/db2fenc"
+          uid: 901
+          gid: 902
+          fenced_uid: 801
+          fenced_gid: 802
+          createhome: false
